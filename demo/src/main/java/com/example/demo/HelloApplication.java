@@ -9,7 +9,7 @@ public class HelloApplication extends Application {
     @Override
     public void start(Stage stage) {
 
-        MainWindow mainWindow = new MainWindow(stage);
+        new MainWindow(stage);
     }
 
     public static void main(String[] args) {
