@@ -7,6 +7,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
@@ -20,6 +22,17 @@ public class MainWindow {
 
     private final Stage stage;
     private GridPane gridPane;
+
+    private TextField fullNameField;
+    private TextField emailAddressField;
+    private TextField phoneNumberField;
+    private ComboBox<String> genderBox;
+    private DatePicker birthDatePicker;
+    private DatePicker travelDatePicker;
+    private ComboBox<String> destinationBox;
+    private ComboBox<String> departureTimeBox;
+
+
 
     public MainWindow(Stage stage) {
 
@@ -36,30 +49,31 @@ public class MainWindow {
         gridPane.setVgap(10);
 
         Text titleText = new Text("Create Boarding Pass");
+        titleText.setFont(Font.font("Tahoma", FontWeight.NORMAL, 18));
         gridPane.add(titleText, 0, 0, 2, 1);
 
         Label fullNameLabel = new Label("Full Name: ");
         gridPane.add(fullNameLabel, 0, 1);
 
-        TextField fullNameField = new TextField();
+        fullNameField = new TextField();
         gridPane.add(fullNameField, 1, 1);
 
         Label emailAddressLabel = new Label("Email Address:");
         gridPane.add(emailAddressLabel, 0, 2);
 
-        TextField emailAddressField = new TextField();
+        emailAddressField = new TextField();
         gridPane.add(emailAddressField, 1, 2);
 
         Label phoneNumberLabel = new Label("Phone Number:");
         gridPane.add(phoneNumberLabel, 0, 3);
 
-        TextField phoneNumberField = new TextField();
+        phoneNumberField = new TextField();
         gridPane.add(phoneNumberField, 1, 3);
 
         Label genderLabel = new Label("Gender: ");
         gridPane.add(genderLabel, 0, 4);
 
-        ComboBox<String> genderBox = new ComboBox<>();
+        genderBox = new ComboBox<>();
         genderBox.getItems().addAll(
                 "Male",
                 "Female",
@@ -70,7 +84,7 @@ public class MainWindow {
         Label birthDateLabel = new Label("Birth Date: ");
         gridPane.add(birthDateLabel, 0, 5);
 
-        DatePicker birthDatePicker = new DatePicker();
+        birthDatePicker = new DatePicker();
         birthDatePicker.setOnAction(e -> {
             getBirthDate();
         });
@@ -79,7 +93,7 @@ public class MainWindow {
         Label travelDateLabel = new Label("Travel Date: ");
         gridPane.add(travelDateLabel, 0, 6);
 
-        DatePicker travelDatePicker = new DatePicker();
+        travelDatePicker = new DatePicker();
         travelDatePicker.setOnAction(e -> {
             getTravelDate();
         });
@@ -88,7 +102,7 @@ public class MainWindow {
         Label destinationLabel = new Label("Destination: ");
         gridPane.add(destinationLabel, 0, 7);
 
-        ComboBox<String> destinationBox = new ComboBox<>();
+        destinationBox = new ComboBox<>();
         destinationBox.getItems().addAll(
                 "ATL",
                 "DFW",
@@ -105,21 +119,26 @@ public class MainWindow {
         Label departureTimeLabel = new Label("Departure Time: ");
         gridPane.add(departureTimeLabel, 0, 8);
 
-        ComboBox<String> departureTimeBox = new ComboBox<>();
+        departureTimeBox = new ComboBox<>();
         departureTimeBox.setItems(FXCollections.observableArrayList(DepartureTimes.generateDepartureTimes()));
         gridPane.add(departureTimeBox, 1, 8);
 
         Button submitButton = new Button("Submit");
+        submitButton.setOnAction(e -> onSubmitClick());
 
         Button resetButton = new Button("Reset");
+        resetButton.setOnAction(e -> onResetClick());
 
         HBox buttonBox = new HBox();
         buttonBox.setSpacing(10);
+        buttonBox.setPadding(new Insets(15, 0, 0, 0));
         buttonBox.getChildren().addAll(submitButton, resetButton);
         gridPane.add(buttonBox, 1, 9);
 
-        Scene scene = new Scene(gridPane, 600, 600);
+        Scene scene = new Scene(gridPane, 450, 500);
         stage.setScene(scene);
+        stage.setTitle("Create Boarding Pass");
+        stage.setResizable(false);
         stage.show();
     }
 
@@ -131,5 +150,21 @@ public class MainWindow {
     private String getTravelDate() {
 
         return null;
+    }
+
+    private void onSubmitClick() {
+
+    }
+
+    private void onResetClick() {
+
+        fullNameField.setText("");
+        emailAddressField.setText("");
+        phoneNumberField.setText("");
+        birthDatePicker.setValue(null);
+        travelDatePicker.setValue(null);
+        departureTimeBox.setValue("");
+        destinationBox.setValue("");
+        genderBox.setValue("");
     }
 }

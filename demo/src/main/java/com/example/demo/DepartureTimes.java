@@ -28,7 +28,7 @@ public class DepartureTimes {
             if (!hour.contains(randomHour)) {
                 hour.add(randomHour);
                 DecimalFormat formatter = new DecimalFormat("00");
-                String time = formatter.format(randomHour()) + ":" + formatter.format(randomMinute());
+                String time = formatter.format(randomHour) + ":" + formatter.format(randomMinute());
                 departureTimes.add(time);
             } else {
                 i--;
