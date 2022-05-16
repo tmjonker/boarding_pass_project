@@ -41,6 +41,9 @@ public class MainWindow {
         this.stage = stage;
 
         generateWindow();
+        generateFields();
+        generateButtons();
+        showStage();
     }
 
     private void generateWindow() {
@@ -55,6 +58,9 @@ public class MainWindow {
         ImageView imageView = new ImageView(image);
 
         gridPane.add(imageView, 0, 0);
+    }
+
+    private void generateFields() {
 
         Text titleText = new Text("Create Boarding Pass");
         titleText.setFont(Font.font("Tahoma", FontWeight.NORMAL, 18));
@@ -146,8 +152,12 @@ public class MainWindow {
         gridPane.add(departureTimeLabel, 0, 8);
 
         departureTimeBox = new ComboBox<>();
+        // Generates a list of random departure times.
         departureTimeBox.setItems(FXCollections.observableArrayList(DepartureTimes.generateDepartureTimes()));
         gridPane.add(departureTimeBox, 1, 8);
+    }
+
+    private void generateButtons() {
 
         Button submitButton = new Button("Submit");
         submitButton.setOnAction(e -> onSubmitClick());
@@ -160,6 +170,9 @@ public class MainWindow {
         buttonBox.setPadding(new Insets(15, 0, 0, 0));
         buttonBox.getChildren().addAll(submitButton, resetButton);
         gridPane.add(buttonBox, 1, 9);
+    }
+
+    private void showStage() {
 
         Scene scene = new Scene(gridPane, 450, 500);
         stage.setScene(scene);
@@ -182,7 +195,15 @@ public class MainWindow {
         System.out.println(departureDate);
     }
 
+    // Processes data that is entered by the user and generates the boarding pass.
     private void onSubmitClick() {
+
+        validateUserEntry(); // checks form for missing entries and alerts user if any field is not filled in.
+
+        // process data and generate boarding pass.
+    }
+
+    private void validateUserEntry() {
 
         if (fullNameField.getText().equals("")) {
             AlertGenerator.generateAlert("Missing 'Full Name'", "The 'Full Name' field needs to be filled in");
@@ -201,9 +222,6 @@ public class MainWindow {
         } else if (genderBox.getValue() == null) {
             AlertGenerator.generateAlert("Missing 'Gender'", "The 'Gender' field needs to be filled in");
         }
-
-
-        // process data and generate boarding pass.
     }
 
     private void onResetClick() {
