@@ -1,5 +1,7 @@
-package com.example.demo;
+package com.example.demo.gui;
 
+import com.example.demo.alertgenerator.AlertGenerator;
+import com.example.demo.departuretimes.DepartureTimes;
 import javafx.collections.FXCollections;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -12,11 +14,8 @@ import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
-import java.text.DecimalFormat;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.time.Period;
 
 public class MainWindow {
 
@@ -32,7 +31,8 @@ public class MainWindow {
     private ComboBox<String> destinationBox;
     private ComboBox<String> departureTimeBox;
 
-
+    private int age;
+    private String departureDate;
 
     public MainWindow(Stage stage) {
 
@@ -86,16 +86,34 @@ public class MainWindow {
 
         birthDatePicker = new DatePicker();
         birthDatePicker.setOnAction(e -> {
-            getBirthDate();
+            getAge(); // assigns age value to age variable.
+        });
+        // Prevents user from selecting a future date for their birthdate.
+        birthDatePicker.setDayCellFactory(picker -> new DateCell() {
+            public void updateItem(LocalDate date, boolean empty) {
+                super.updateItem(date, empty);
+                LocalDate today = LocalDate.now();
+
+                setDisable(empty || date.compareTo(today) > 0);
+            }
         });
         gridPane.add(birthDatePicker, 1, 5);
 
-        Label travelDateLabel = new Label("Travel Date: ");
+        Label travelDateLabel = new Label("Departure Date: ");
         gridPane.add(travelDateLabel, 0, 6);
 
         travelDatePicker = new DatePicker();
         travelDatePicker.setOnAction(e -> {
-            getTravelDate();
+            getTravelDate(); // assigns departure date to departureDate variable in 'YYYY-MM-DD' format.
+        });
+        // Prevents user from selecting a past date for their departure date.
+        travelDatePicker.setDayCellFactory(picker -> new DateCell() {
+            public void updateItem(LocalDate date, boolean empty) {
+                super.updateItem(date, empty);
+                LocalDate today = LocalDate.now();
+
+                setDisable(empty || date.compareTo(today) < 0);
+            }
         });
         gridPane.add(travelDatePicker, 1, 6);
 
@@ -142,18 +160,42 @@ public class MainWindow {
         stage.show();
     }
 
-    private String getBirthDate() {
+    private void getAge() {
 
-        return null;
+        LocalDate currentDate = LocalDate.now();
+        LocalDate birthdate = birthDatePicker.getValue();
+
+        age = Period.between(birthdate, currentDate).getYears();
     }
 
-    private String getTravelDate() {
+    private void getTravelDate() {
 
-        return null;
+        departureDate = travelDatePicker.getValue().toString();
+        System.out.println(departureDate);
     }
 
     private void onSubmitClick() {
 
+        if (fullNameField.getText().equals("")) {
+            AlertGenerator.generateAlert("Missing 'Full Name'", "The 'Full Name' field needs to be filled in");
+        } else if (emailAddressField.getText().equals("")) {
+            AlertGenerator.generateAlert("Missing 'Email Address'", "The 'Email Address' field needs to be filled in");
+        } else if (phoneNumberField.getText().equals("")) {
+            AlertGenerator.generateAlert("Missing 'Phone Number'", "The 'Phone Number' field needs to be filled in");
+        } else if (birthDatePicker.getValue() == null) {
+            AlertGenerator.generateAlert("Missing 'Birth Date'", "The 'Birth Date' field needs to be filled in");
+        } else if (travelDatePicker.getValue() == null) {
+            AlertGenerator.generateAlert("Missing 'Departure Date'", "The 'Departure Date' field needs to be filled in");
+        } else if (departureTimeBox.getValue() == null) {
+            AlertGenerator.generateAlert("Missing 'Departure Time'", "The 'Departure Time' field needs to be filled in");
+        } else if (destinationBox.getValue() == null) {
+            AlertGenerator.generateAlert("Missing 'Destination'", "The 'Destination' field needs to be filled in");
+        } else if (genderBox.getValue() == null) {
+            AlertGenerator.generateAlert("Missing 'Gender'", "The 'Gender' field needs to be filled in");
+        }
+
+
+        // process data and generate boarding pass.
     }
 
     private void onResetClick() {
