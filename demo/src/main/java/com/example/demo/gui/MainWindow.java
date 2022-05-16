@@ -7,8 +7,10 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
@@ -47,10 +49,16 @@ public class MainWindow {
         gridPane.setAlignment(Pos.CENTER);
         gridPane.setHgap(10);
         gridPane.setVgap(10);
+        gridPane.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, new BorderWidths(5))));
+
+        Image image = new Image("airplane.png");
+        ImageView imageView = new ImageView(image);
+
+        gridPane.add(imageView, 0, 0);
 
         Text titleText = new Text("Create Boarding Pass");
         titleText.setFont(Font.font("Tahoma", FontWeight.NORMAL, 18));
-        gridPane.add(titleText, 0, 0, 2, 1);
+        gridPane.add(titleText, 1, 0, 2, 1);
 
         Label fullNameLabel = new Label("Full Name: ");
         gridPane.add(fullNameLabel, 0, 1);
