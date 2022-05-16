@@ -1,4 +1,4 @@
-package com.example.demo;
+package com.example.demo.departuretimes;
 
 import java.text.DecimalFormat;
 import java.util.ArrayList;
