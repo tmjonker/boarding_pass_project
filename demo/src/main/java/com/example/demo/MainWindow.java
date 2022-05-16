@@ -12,11 +12,8 @@ import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
-import java.text.DecimalFormat;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.time.Period;
 
 public class MainWindow {
 
@@ -32,7 +29,8 @@ public class MainWindow {
     private ComboBox<String> destinationBox;
     private ComboBox<String> departureTimeBox;
 
-
+    private int age;
+    private String departureDate;
 
     public MainWindow(Stage stage) {
 
@@ -86,7 +84,7 @@ public class MainWindow {
 
         birthDatePicker = new DatePicker();
         birthDatePicker.setOnAction(e -> {
-            getBirthDate();
+            getAge(); // assigns age value to age variable.
         });
         gridPane.add(birthDatePicker, 1, 5);
 
@@ -95,7 +93,7 @@ public class MainWindow {
 
         travelDatePicker = new DatePicker();
         travelDatePicker.setOnAction(e -> {
-            getTravelDate();
+            getTravelDate(); // assigns departure date to departureDate variable in 'YYYY-MM-DD' format.
         });
         gridPane.add(travelDatePicker, 1, 6);
 
@@ -142,18 +140,36 @@ public class MainWindow {
         stage.show();
     }
 
-    private String getBirthDate() {
+    private void getAge() {
 
-        return null;
+        LocalDate currentDate = LocalDate.now();
+        LocalDate birthdate = birthDatePicker.getValue();
+
+        age = Period.between(birthdate, currentDate).getYears();
     }
 
-    private String getTravelDate() {
+    private void getTravelDate() {
 
-        return null;
+        departureDate = travelDatePicker.getValue().toString();
+        System.out.println(departureDate);
     }
 
     private void onSubmitClick() {
 
+        if (fullNameField.getText().equals("")) {
+            AlertGenerator.generateAlert("Missing 'Full Name'", "The 'Full Name' field needs to be filled in");
+        }
+
+        if (emailAddressField.getText().equals("")) {
+            AlertGenerator.generateAlert("Missing 'Email Address'", "The 'Email Address' field needs to be filled in");
+        }
+
+        if (phoneNumberField.getText().equals("")) {
+            AlertGenerator.generateAlert("Missing 'Phone Number'", "The 'Phone Number' field needs to be filled in");
+        }
+
+        if ()
+        // process data and generate boarding pass.
     }
 
     private void onResetClick() {
