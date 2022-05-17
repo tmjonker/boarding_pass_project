@@ -8,13 +8,13 @@ public class BoardingPass {
     private String phoneNumber;
     private char gender;
     private int age;
-    private int boardingPassNumber;
+    private String boardingPassNumber;
     private String date;
     private String origin;
     private String destination;
     private String departureTime;
     private String estimatedTimeOfArrival;
-    private double ticketPrice;
+    private double ticketPrice = 80.00; //arbitrary base price
     public BoardingPass() {
     }
 
@@ -23,7 +23,7 @@ public class BoardingPass {
                         String phoneNumber,
                         char gender,
                         int age,
-                        int boardingPassNumber,
+                        String boardingPassNumber,
                         String date,
                         String origin,
                         String destination,
@@ -39,6 +39,7 @@ public class BoardingPass {
         this.destination = destination;
         this.departureTime = departureTime;
     }
+
 
     public String getName() {
         return name;
@@ -80,11 +81,11 @@ public class BoardingPass {
         this.age = age;
     }
 
-    public int getBoardingPassNumber() {
+    public String getBoardingPassNumber() {
         return boardingPassNumber;
     }
 
-    public void setBoardingPassNumber(int boardingPassNumber) {
+    public void setBoardingPassNumber(String boardingPassNumber) {
         this.boardingPassNumber = boardingPassNumber;
     }
 
@@ -124,6 +125,11 @@ public class BoardingPass {
         return estimatedTimeOfArrival;
     }
 
+    /*
+    public String calcETA(){
+
+    }
+     */
     public void setEstimatedTimeOfArrival(String estimatedTimeOfArrival) {
         this.estimatedTimeOfArrival = estimatedTimeOfArrival;
     }
@@ -132,7 +138,24 @@ public class BoardingPass {
         return ticketPrice;
     }
 
+    public double calcTicketPrice(double ticketPrice, int age, char gender){
+        if(age <= 12){
+            ticketPrice = ticketPrice * 0.5;
+        }
+        else if(age >= 60){
+            ticketPrice = ticketPrice * 0.4; //60% off
+        }
+
+        if(gender == 'F' || gender == 'f'){
+            ticketPrice = ticketPrice * 0.75; //25% off
+        }
+
+        return ticketPrice;
+
+    }
+
     public void setTicketPrice(double ticketPrice) {
+        ticketPrice = calcTicketPrice(getTicketPrice(), getAge(), getGender());
         this.ticketPrice = ticketPrice;
     }
 
