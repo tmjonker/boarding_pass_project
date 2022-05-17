@@ -14,6 +14,7 @@ import javafx.scene.paint.ImagePattern;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 public class FindBoardingPassWindow {
@@ -23,6 +24,7 @@ public class FindBoardingPassWindow {
 
     private TextField boardingPassNumberField;
     private Button submitButton;
+    private Button cancelButton;
 
     public FindBoardingPassWindow() {
 
@@ -51,13 +53,15 @@ public class FindBoardingPassWindow {
         gridPane.add(boardingPassNumberField, 1, 1);
 
         submitButton = new Button("Submit");
+        cancelButton = new Button("Cancel");
 
         submitButton.setOnAction(e -> onSubmitClick());
+        cancelButton.setOnAction(e -> stage.close());
 
         HBox buttonBox = new HBox();
         buttonBox.setSpacing(10);
         buttonBox.setPadding(new Insets(15, 0, 0, 0));
-        buttonBox.getChildren().addAll(submitButton);
+        buttonBox.getChildren().addAll(submitButton, cancelButton);
 
         gridPane.add(buttonBox, 1, 2);
     }
@@ -74,6 +78,7 @@ public class FindBoardingPassWindow {
         stage.setTitle("Find Boarding Pass");
         stage.getIcons().add(new Image("icon1.png"));
         stage.setResizable(false);
+        stage.initModality(Modality.APPLICATION_MODAL);
         stage.show();
     }
 
