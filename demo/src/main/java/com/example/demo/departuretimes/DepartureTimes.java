@@ -17,6 +17,7 @@ public class DepartureTimes {
         return (int) (Math.random() * 60);
     }
 
+    // Generates list of 10 random departure times
     public static List<String> generateDepartureTimes() {
 
         List<String> departureTimes = new ArrayList<>();

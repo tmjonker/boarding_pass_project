@@ -208,7 +208,7 @@ public class MainWindow {
     }
 
     private void getTravelDate() {
-
+        // departure date is stored in YYYY-MM-DD format.
         departureDate = travelDatePicker.getValue().toString();
         System.out.println(departureDate);
     }
