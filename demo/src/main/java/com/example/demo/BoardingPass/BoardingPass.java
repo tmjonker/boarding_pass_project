@@ -3,6 +3,8 @@ package com.example.demo.BoardingPass;
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class BoardingPass {
     private String name;
@@ -17,6 +19,8 @@ public class BoardingPass {
     private String departureTime;
     private String estimatedTimeOfArrival;
     private double ticketPrice = 80.00; //arbitrary base price
+    private Map<String, Double> locations = new HashMap<>(); //making double to use math.round
+
     public BoardingPass() {
     }
 
@@ -30,7 +34,8 @@ public class BoardingPass {
                         String origin,
                         String destination,
                         String departureTime,
-                        double ticketPrice) {
+                        double ticketPrice,
+                        String estimatedTimeOfArrival) {
         this.name = name;
         this.email = email;
         this.phoneNumber = phoneNumber;
@@ -42,6 +47,17 @@ public class BoardingPass {
         this.destination = destination;
         this.departureTime = departureTime;
         this.ticketPrice = ticketPrice;
+        this.estimatedTimeOfArrival = estimatedTimeOfArrival;
+
+        locations.put("ATL", 0.0);
+        locations.put("DFW", 800.0);
+        locations.put("DEN", 1400.0);
+        locations.put("ORD", 725.0);
+        locations.put("LAX", 2100.0);
+        locations.put("CLT", 240.0);
+        locations.put("LAS", 2000.0);
+        locations.put("PHX", 1850.0);
+        locations.put("MCO", 450.0);
     }
 
 
@@ -129,11 +145,41 @@ public class BoardingPass {
         return estimatedTimeOfArrival;
     }
 
-    /*
-    public String calcETA(){
+    public String calcETA(String origin, String destination){
+        String eta ="";
+        String key = origin;
+        String find = destination;
+        double base = 0.0;
+        double dest = 0.0;
+        int time;
 
+        for(Map.Entry<String, Double> i: locations.entrySet()){
+            if(i.getKey() == key){
+                base = i.getValue();
+            }
+            if(i.getKey() == find){
+                dest = i.getValue();
+            }
+        }
+
+        time = (int) Math.round(Math.abs((dest - base) / 400)); //get mile difference between origin and destination divided by speed of plane to get eta
+        eta = String.valueOf(time);
+        String dep = getDepartureTime();
+
+        List<Integer> temp = new ArrayList<>();
+        temp = Arrays.stream(dep.split(":")).map(x-> Integer.parseInt(x)).collect(Collectors.toList());
+
+        int digit = temp.get(0) + time;
+
+        if(digit > 24){
+            digit = digit % 24;//get remainder
+        }
+
+        eta = digit + ":" + temp.get(1); // should be outputting time of arrival based on when leaving airport
+
+        return eta;
     }
-     */
+
     public void setEstimatedTimeOfArrival(String estimatedTimeOfArrival) {
         this.estimatedTimeOfArrival = estimatedTimeOfArrival;
     }

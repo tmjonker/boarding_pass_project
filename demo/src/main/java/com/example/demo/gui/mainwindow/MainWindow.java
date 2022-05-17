@@ -118,9 +118,10 @@ public class MainWindow {
         String destination = mainWindowFieldHandler.getDestinationBox().getValue();
         String departureTime = mainWindowFieldHandler.getDepartureTimeBox().getValue();
         double ticketPrice = boardingPassService.calcTicketPrice(80.00, age, gender);
+        String eta = boardingPassService.calcETA(origin, destination);
 
         BoardingPass boardingPass = new BoardingPass(name, email, phoneNumber, gender, age, boardingPassNumber,
-                departureDate, origin, destination, departureTime, ticketPrice);
+                departureDate, origin, destination, departureTime, ticketPrice, eta);
 
         boardingPass.writeToFile();
 
