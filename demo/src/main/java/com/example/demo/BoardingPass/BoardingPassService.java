@@ -9,7 +9,7 @@ import java.util.Scanner;
 import java.util.concurrent.ThreadLocalRandom;
 import java.util.regex.Pattern;
 
-public class BoardingPassService {
+public class BoardingPassService extends BoardingPass{
     private int idCount;
     private ArrayList<BoardingPass> passes;
     private String check;
@@ -313,7 +313,8 @@ public class BoardingPassService {
                 date,
                 origin,
                 destination,
-                departureTime));
+                departureTime,
+                getTicketPrice()));
     }
 
     public String check(ArrayList<BoardingPass> x, String y){//used to check if ID is taken
@@ -328,7 +329,7 @@ public class BoardingPassService {
         String originS = "LAX";
         String destinationS = "ATL";
         String departureTimeS = "9:30 PM";
-        passes.add(new BoardingPass(nameS, emailS, phoneNumberS, genderS, ageS, boardingPassNumberS, dateS, originS, destinationS, departureTimeS));
+        passes.add(new BoardingPass(nameS, emailS, phoneNumberS, genderS, ageS, boardingPassNumberS, dateS, originS, destinationS, departureTimeS, getTicketPrice()));
 
         for(int i = 0; i < x.size(); i++){
             if(passes.get(i).getBoardingPassNumber() == y){
