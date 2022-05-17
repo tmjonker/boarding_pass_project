@@ -1,4 +1,4 @@
-package com.example.demo.alertgenerator;
+package com.example.demo.gui.alertgenerator;
 
 import javafx.scene.control.Alert;
 

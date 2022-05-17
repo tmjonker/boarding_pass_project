@@ -1,7 +1,7 @@
 package com.example.demo.gui.mainwindow;
 
-import com.example.demo.alertgenerator.AlertGenerator;
-import com.example.demo.departuretimes.DepartureTimes;
+import com.example.demo.gui.alertgenerator.AlertGenerator;
+import com.example.demo.gui.departuretimes.DepartureTimes;
 import javafx.collections.FXCollections;
 import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
