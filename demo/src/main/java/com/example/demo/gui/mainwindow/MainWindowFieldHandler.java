@@ -73,7 +73,8 @@ public class MainWindowFieldHandler {
 
         birthDatePicker = new DatePicker();
         birthDatePicker.setOnAction(e -> {
-            setAge(); // assigns age value to age variable.
+            if (birthDatePicker.getValue() != null)
+                setAge(); // assigns age value to age variable.
         });
         // Prevents user from selecting a future date for their birthdate.
         birthDatePicker.setDayCellFactory(picker -> new DateCell() {
@@ -92,7 +93,8 @@ public class MainWindowFieldHandler {
 
         travelDatePicker = new DatePicker();
         travelDatePicker.setOnAction(e -> {
-            setTravelDate(); // assigns departure date to departureDate variable in 'YYYY-MM-DD' format.
+            if (travelDatePicker.getValue() != null)
+                setTravelDate(); // assigns departure date to departureDate variable in 'YYYY-MM-DD' format.
         });
         // Prevents user from selecting a past date for their departure date.
         travelDatePicker.setDayCellFactory(picker -> new DateCell() {
@@ -181,6 +183,7 @@ public class MainWindowFieldHandler {
         phoneNumberField.setText("");
         birthDatePicker.setValue(null);
         travelDatePicker.setValue(null);
+        originBox.setValue("");
         departureTimeBox.setValue("");
         destinationBox.setValue("");
         genderBox.setValue("");
