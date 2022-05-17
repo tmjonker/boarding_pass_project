@@ -29,7 +29,8 @@ public class BoardingPass {
                         String date,
                         String origin,
                         String destination,
-                        String departureTime) {
+                        String departureTime,
+                        double ticketPrice) {
         this.name = name;
         this.email = email;
         this.phoneNumber = phoneNumber;
@@ -40,6 +41,7 @@ public class BoardingPass {
         this.origin = origin;
         this.destination = destination;
         this.departureTime = departureTime;
+        this.ticketPrice = ticketPrice;
     }
 
 
@@ -140,7 +142,7 @@ public class BoardingPass {
         return ticketPrice;
     }
 
-    public double calcTicketPrice(double ticketPrice, int age, char gender){
+    public double calcTicketPrice(double ticketPrice, int age, String gender){
         if(age <= 12){
             ticketPrice = ticketPrice * 0.5;
         }
@@ -148,7 +150,7 @@ public class BoardingPass {
             ticketPrice = ticketPrice * 0.4; //60% off
         }
 
-        if(gender == 'F' || gender == 'f'){
+        if(gender.charAt(0) == 'F' || gender.charAt(0) == 'f'){
             ticketPrice = ticketPrice * 0.75; //25% off
         }
 
@@ -157,7 +159,6 @@ public class BoardingPass {
     }
 
     public void setTicketPrice(double ticketPrice) {
-        ticketPrice = calcTicketPrice(getTicketPrice(), getAge(), getGender().charAt(0));
         this.ticketPrice = ticketPrice;
     }
 
