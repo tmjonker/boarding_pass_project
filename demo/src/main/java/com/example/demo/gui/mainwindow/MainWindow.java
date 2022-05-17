@@ -2,6 +2,7 @@ package com.example.demo.gui.mainwindow;
 
 import com.example.demo.BoardingPass.BoardingPass;
 import com.example.demo.BoardingPass.BoardingPassService;
+import com.example.demo.gui.alertgenerator.AlertGenerator;
 import com.example.demo.gui.findboardingpasswindow.FindBoardingPassWindow;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -121,6 +122,16 @@ public class MainWindow {
                 departureDate, origin, destination, departureTime);
 
         boardingPass.writeToFile();
+
+        boardingPass = boardingPassService.searchFileForPass(boardingPassNumber);
+
+        if (boardingPass != null) {
+            AlertGenerator.generateSuccessDialog("Boarding Pass has been generated.");
+        } else {
+            AlertGenerator.generateErrorDialog("Failed to generate boarding pass");
+        }
+
+        onResetClick(); // resets all fields to blanks.
 
         System.out.println(boardingPass);
     }

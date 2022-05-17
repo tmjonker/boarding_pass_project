@@ -23,4 +23,24 @@ public class AlertGenerator {
 
         alert.showAndWait();
     }
+
+    public static void generateSuccessDialog(String title) {
+
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Success");
+        alert.setHeaderText("Success!");
+        alert.setContentText(title);
+
+        alert.showAndWait();
+    }
+
+    public static void generateErrorDialog(String title) {
+
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Error");
+        alert.setHeaderText("Error!");
+        alert.setContentText(title);
+
+        alert.showAndWait();
+    }
 }

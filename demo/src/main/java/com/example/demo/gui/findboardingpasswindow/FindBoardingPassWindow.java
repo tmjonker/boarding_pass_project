@@ -1,5 +1,8 @@
 package com.example.demo.gui.findboardingpasswindow;
 
+import com.example.demo.BoardingPass.BoardingPass;
+import com.example.demo.BoardingPass.BoardingPassService;
+import com.example.demo.gui.alertgenerator.AlertGenerator;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -83,9 +86,24 @@ public class FindBoardingPassWindow {
     }
 
     private void onSubmitClick() {
+        BoardingPassService boardingPassService = new BoardingPassService();
 
+        String boardingPassNumber = boardingPassNumberField.getText();
+        BoardingPass boardingPass = null;
+
+        if (!boardingPassNumber.equals("")) {
+            boardingPass = boardingPassService.searchFileForPass(boardingPassNumber);
+        } else {
+            AlertGenerator.generateFieldAlert("Boarding Pass Number");
+        }
+
+        if (boardingPass != null) {
+            AlertGenerator.generateSuccessDialog("Boarding Pass has been located.");
+        } else {
+            AlertGenerator.generateErrorDialog("Boarding pass could not be located.");
+        }
+        
+        System.out.println(boardingPass);
         stage.close();
-
-        // Lookup boarding pass
     }
 }
