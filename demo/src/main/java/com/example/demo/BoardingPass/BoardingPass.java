@@ -1,6 +1,8 @@
 package com.example.demo.BoardingPass;
 
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
 
 public class BoardingPass {
     private String name;
@@ -175,5 +177,18 @@ public class BoardingPass {
                 ", estimatedTimeOfArrival='" + estimatedTimeOfArrival + '\'' +
                 ", ticketPrice=" + ticketPrice +
                 '}';
+    }
+    public void writeToFile()
+    {
+        try{
+            FileWriter fw = new FileWriter("src/main/resources/RawBoardingPasses.txt",true);
+            BufferedWriter bw = new BufferedWriter(fw);
+            bw.write(this.toString());
+            bw.newLine();
+            bw.close();
+        }catch(Exception e)
+        {
+            System.out.println(e.getMessage());
+        }
     }
 }

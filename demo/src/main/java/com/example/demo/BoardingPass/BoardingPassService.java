@@ -49,7 +49,11 @@ public class BoardingPassService {
     }
     public boolean validatePhoneNumber(String phoneNumber)
     {
-        Pattern pat = Pattern.compile("(0/91)?[7-9][0-9]{9}");
+        String patterns
+                = "^(\\+\\d{1,3}( )?)?((\\(\\d{3}\\))|\\d{3})[- .]?\\d{3}[- .]?\\d{4}$"
+                + "|^(\\+\\d{1,3}( )?)?(\\d{3}[ ]?){2}\\d{3}$"
+                + "|^(\\+\\d{1,3}( )?)?(\\d{3}[ ]?)(\\d{2}[ ]?){2}\\d{2}$";
+        Pattern pat = Pattern.compile(patterns);
         return pat.matcher(phoneNumber).matches();
     }
 
@@ -292,5 +296,9 @@ public class BoardingPassService {
             }
         }
         return null;
+    }
+
+    public ArrayList<BoardingPass> getPasses() {
+        return passes;
     }
 }
