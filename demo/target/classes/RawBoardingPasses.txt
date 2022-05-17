@@ -1,0 +1,1 @@
+BoardingPass{name='Matthew', email='example@example.com', phoneNumber='(831) 123-1234', gender=Male, age=23, boardingPassNumber=GVKW4R, date='5-17-2022', origin='LAX', destination='MCO', departureTime='11:30 AM', estimatedTimeOfArrival='null', ticketPrice=80.0}

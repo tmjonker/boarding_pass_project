@@ -120,6 +120,8 @@ public class MainWindow {
         BoardingPass boardingPass = new BoardingPass(name, email, phoneNumber, gender, age, boardingPassNumber,
                 departureDate, origin, destination, departureTime);
 
+        boardingPass.writeToFile();
+
         System.out.println(boardingPass);
     }
 
