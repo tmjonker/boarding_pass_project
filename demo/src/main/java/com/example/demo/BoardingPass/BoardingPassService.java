@@ -314,7 +314,8 @@ public class BoardingPassService extends BoardingPass{
                 origin,
                 destination,
                 departureTime,
-                getTicketPrice()));
+                getTicketPrice(),
+                getEstimatedTimeOfArrival()));
     }
 
     public String check(ArrayList<BoardingPass> x, String y){//used to check if ID is taken
@@ -329,7 +330,8 @@ public class BoardingPassService extends BoardingPass{
         String originS = "LAX";
         String destinationS = "ATL";
         String departureTimeS = "9:30 PM";
-        passes.add(new BoardingPass(nameS, emailS, phoneNumberS, genderS, ageS, boardingPassNumberS, dateS, originS, destinationS, departureTimeS, getTicketPrice()));
+        String eta = getEstimatedTimeOfArrival();
+        passes.add(new BoardingPass(nameS, emailS, phoneNumberS, genderS, ageS, boardingPassNumberS, dateS, originS, destinationS, departureTimeS, getTicketPrice(),eta));
 
         for(int i = 0; i < x.size(); i++){
             if(passes.get(i).getBoardingPassNumber() == y){
