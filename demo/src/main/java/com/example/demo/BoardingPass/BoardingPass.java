@@ -6,7 +6,7 @@ public class BoardingPass {
     private String name;
     private String email;
     private String phoneNumber;
-    private char gender;
+    private String gender;
     private int age;
     private String boardingPassNumber;
     private String date;
@@ -21,7 +21,7 @@ public class BoardingPass {
     public BoardingPass(String name,
                         String email,
                         String phoneNumber,
-                        char gender,
+                        String gender,
                         int age,
                         String boardingPassNumber,
                         String date,
@@ -65,11 +65,11 @@ public class BoardingPass {
         this.phoneNumber = phoneNumber;
     }
 
-    public char getGender() {
+    public String getGender() {
         return gender;
     }
 
-    public void setGender(char gender) {
+    public void setGender(String gender) {
         this.gender = gender;
     }
 
@@ -155,7 +155,7 @@ public class BoardingPass {
     }
 
     public void setTicketPrice(double ticketPrice) {
-        ticketPrice = calcTicketPrice(getTicketPrice(), getAge(), getGender());
+        ticketPrice = calcTicketPrice(getTicketPrice(), getAge(), getGender().charAt(0));
         this.ticketPrice = ticketPrice;
     }
 

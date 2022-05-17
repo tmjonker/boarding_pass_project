@@ -135,21 +135,20 @@ public class BoardingPassService {
         }while(phoneNumber.equals(""));
 
 
-        char gender =' ';
+        String gender ="";
 
         System.out.println("Please enter your gender F for female, M for male");
         do{
             try {
-                gender=scan.next().charAt(0);
-                if(gender!='F'&&gender!='M') {
+                gender=scan.nextLine();
+                if(!gender.equalsIgnoreCase("MALE")&&!gender.toUpperCase().equals("FEMALE")) {
                     throw new RuntimeException("Unexpected input");
                 }
             }catch (Exception e)
             {
                 System.out.println(e.getMessage());
             }
-            gender = Character.toUpperCase(gender);
-        }while(gender !='F' && gender!='M');
+        }while(!gender.equalsIgnoreCase("MALE") &&!gender.equalsIgnoreCase("FEMALE"));
 
 
 
@@ -236,7 +235,7 @@ public class BoardingPassService {
         String nameS = "y";
         String emailS = "t@gmail.com";
         String phoneNumberS = "8880344456";
-        char genderS = 'F';
+        String genderS = "F";
         int ageS = 20;
         String boardingPassNumberS = "JQWX23";
         String dateS = "5-20-2022";
