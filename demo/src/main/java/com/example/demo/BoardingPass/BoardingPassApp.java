@@ -4,6 +4,6 @@ public class BoardingPassApp {
     public static void main(String[] args) {
         BoardingPassService boardingPassService = new BoardingPassService();
         boardingPassService.addPass("LAX");
-        System.out.println(boardingPassService.findByBoardingPassNumber(1));
+        System.out.println(boardingPassService.findByBoardingPassNumber("XFS8KL"));
     }
 }

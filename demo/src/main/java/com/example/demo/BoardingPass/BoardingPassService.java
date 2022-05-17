@@ -1,12 +1,16 @@
 package com.example.demo.BoardingPass;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.Scanner;
+import java.util.concurrent.ThreadLocalRandom;
 import java.util.regex.Pattern;
 
 public class BoardingPassService {
     private int idCount;
     private ArrayList<BoardingPass> passes;
+    private String check;
     public BoardingPassService() {
         idCount = 0;
         passes = new ArrayList<>();
@@ -220,17 +224,70 @@ public class BoardingPassService {
                 phoneNumber,
                 gender,
                 age,
-                ++idCount,
+                chars(),
                 date,
                 origin,
                 destination,
                 departureTime));
     }
-    public BoardingPass findByBoardingPassNumber(int number)
+
+    public String check(ArrayList<BoardingPass> x, String y){//used to check if ID is taken
+        //quick test case delete later
+        String nameS = "y";
+        String emailS = "t@gmail.com";
+        String phoneNumberS = "8880344456";
+        char genderS = 'F';
+        int ageS = 20;
+        String boardingPassNumberS = "JQWX23";
+        String dateS = "5-20-2022";
+        String originS = "LAX";
+        String destinationS = "ATL";
+        String departureTimeS = "9:30 PM";
+        passes.add(new BoardingPass(nameS, emailS, phoneNumberS, genderS, ageS, boardingPassNumberS, dateS, originS, destinationS, departureTimeS));
+
+        for(int i = 0; i < x.size(); i++){
+            if(passes.get(i).getBoardingPassNumber() == y){
+                y = ""; //clear, change, and return new set
+                y = chars();
+                break;
+            }
+            else{
+                System.out.println("No Match");
+            }
+        }
+
+        return y;
+    }
+
+    public String chars(){//generate pass 6 character ID with letters and numbers
+        String x = "";
+        int roll;
+        char sample = ' ';
+        char sampleNum = ' ';
+
+        for(int i = 0; i < 6; i++){
+            roll = ThreadLocalRandom.current().nextInt(1,6);
+            sample = (char) ThreadLocalRandom.current().nextInt(65, 90); //convert int into letter
+            sampleNum = (char) ThreadLocalRandom.current().nextInt(48, 57); //convert int into number (ascii)
+
+            if(roll == 1) { //want more letters than numbers
+                x += sampleNum;
+            }else{
+                x += sample;
+            }
+        }
+
+        x = check(passes, x);
+
+        return x;
+    }
+
+    public BoardingPass findByBoardingPassNumber(String number)
     {
+        System.out.println(passes.get(0));
         for(var pass : passes)
         {
-            if(pass.getBoardingPassNumber()==number)
+            if(pass.getBoardingPassNumber().contains(number))
             {
                 return pass;
             }
