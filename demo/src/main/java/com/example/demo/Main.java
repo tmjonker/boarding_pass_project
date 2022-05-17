@@ -1,6 +1,6 @@
 package com.example.demo;
 
-import com.example.demo.gui.MainWindow;
+import com.example.demo.gui.mainwindow.MainWindow;
 import javafx.application.Application;
 
 import javafx.stage.Stage;
