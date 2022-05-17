@@ -1,5 +1,7 @@
 package com.example.demo.BoardingPass;
 
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -14,6 +16,86 @@ public class BoardingPassService {
     public BoardingPassService() {
         idCount = 0;
         passes = new ArrayList<>();
+    }
+
+    public BoardingPass searchFileForPass(String targetBoardingPassNumber)
+    {
+        ArrayList<String> lines;
+        try
+        {
+            lines = (ArrayList<String>) Files.readAllLines(Paths.get("src/main/resources/RawBoardingPasses.txt"));
+        }catch (Exception e)
+        {
+            System.out.println(e.getMessage());
+            return null;
+        }
+        for(var line : lines)
+        {
+            if(line.contains("boardingPassNumber="+targetBoardingPassNumber))
+            {
+                return makeBoardingPassFromString(line);
+            }
+        }
+        return null;
+    }
+    public BoardingPass makeBoardingPassFromString(String line)
+    {
+        BoardingPass ret = new BoardingPass();
+        String filteredLine = line.substring(13,line.length()-2);
+        String[] fields = filteredLine.split(", ");
+
+        for(var field: fields)
+        {
+            String[] temp = field.split("=");
+            String removedMarks="";
+            for(int i=0;i<temp[1].length();i++)
+            {
+                if(temp[1].charAt(i)!='\'')
+                {
+                    removedMarks+=temp[1].charAt(i);
+                }
+            }
+            temp[1] = removedMarks;
+            switch (temp[0]){
+                case "name":
+                    ret.setName(temp[1]);
+                    break;
+                case "email":
+                    ret.setEmail(temp[1]);
+                    break;
+                case "phoneNumber":
+                    ret.setPhoneNumber(temp[1]);
+                    break;
+                case "gender":
+                    ret.setGender(temp[1]);
+                    break;
+                case "age":
+                    ret.setAge(Integer.parseInt(temp[1]));
+                    break;
+                case "boardingPassNumber":
+                    ret.setBoardingPassNumber(temp[1]);
+                    break;
+                case "date":
+                    ret.setDate(temp[1]);
+                    break;
+                case "origin":
+                    ret.setOrigin(temp[1]);
+                    break;
+                case "destination":
+                    ret.setDestination(temp[1]);
+                    break;
+                case "departureTime":
+                    ret.setDepartureTime(temp[1]);
+                    break;
+                case "estimatedTimeofArrival":
+                    ret.setEstimatedTimeOfArrival(temp[1]);
+                    break;
+                case "ticketPrice":
+                    ret.setTicketPrice(Double.parseDouble(temp[1]));
+                    break;
+            }
+        }
+        return ret;
     }
     public boolean validateEmail(String email)
     {

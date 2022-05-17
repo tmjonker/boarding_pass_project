@@ -19,5 +19,8 @@ public class BoardingPassApp {
         {
             pass.writeToFile();
         }
+        System.out.println(boardingPassService.searchFileForPass("TKE50M"));
+        System.out.println(boardingPassService.searchFileForPass("GVKW4R"));
+        System.out.println(boardingPassService.searchFileForPass("7FCA6Q"));
     }
 }
