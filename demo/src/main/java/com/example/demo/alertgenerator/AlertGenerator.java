@@ -4,12 +4,12 @@ import javafx.scene.control.Alert;
 
 public class AlertGenerator {
 
-    public static void generateAlert(String title, String content) {
+    public static void generateAlert(String title) {
 
         Alert alert = new Alert(Alert.AlertType.ERROR);
-        alert.setTitle(title);
+        alert.setTitle("Missing " + title);
         alert.setHeaderText("Error");
-        alert.setContentText(content);
+        alert.setContentText("The " + title + " field must be filled out.");
 
         alert.showAndWait();
     }

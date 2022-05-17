@@ -6,11 +6,13 @@ import javafx.collections.FXCollections;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.canvas.Canvas;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.ImagePattern;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
@@ -49,6 +51,7 @@ public class MainWindow {
     private void generateWindow() {
 
         gridPane = new GridPane();
+        gridPane.setOpacity(0.85);
         gridPane.setAlignment(Pos.CENTER);
         gridPane.setHgap(10);
         gridPane.setVgap(10);
@@ -58,33 +61,37 @@ public class MainWindow {
         ImageView imageView = new ImageView(image);
 
         gridPane.add(imageView, 0, 0);
-    }
-
-    private void generateFields() {
 
         Text titleText = new Text("Create Boarding Pass");
         titleText.setFont(Font.font("Tahoma", FontWeight.NORMAL, 18));
         gridPane.add(titleText, 1, 0, 2, 1);
+    }
+
+    private void generateFields() {
 
         Label fullNameLabel = new Label("Full Name: ");
+        fullNameLabel.setFont(Font.font("Tahoma", FontWeight.BOLD, 12));
         gridPane.add(fullNameLabel, 0, 1);
 
         fullNameField = new TextField();
         gridPane.add(fullNameField, 1, 1);
 
         Label emailAddressLabel = new Label("Email Address:");
+        emailAddressLabel.setFont(Font.font("Tahoma", FontWeight.BOLD, 12));
         gridPane.add(emailAddressLabel, 0, 2);
 
         emailAddressField = new TextField();
         gridPane.add(emailAddressField, 1, 2);
 
         Label phoneNumberLabel = new Label("Phone Number:");
+        phoneNumberLabel.setFont(Font.font("Tahoma", FontWeight.BOLD, 12));
         gridPane.add(phoneNumberLabel, 0, 3);
 
         phoneNumberField = new TextField();
         gridPane.add(phoneNumberField, 1, 3);
 
         Label genderLabel = new Label("Gender: ");
+        genderLabel.setFont(Font.font("Tahoma", FontWeight.BOLD, 12));
         gridPane.add(genderLabel, 0, 4);
 
         genderBox = new ComboBox<>();
@@ -96,6 +103,7 @@ public class MainWindow {
         gridPane.add(genderBox, 1, 4);
 
         Label birthDateLabel = new Label("Birth Date: ");
+        birthDateLabel.setFont(Font.font("Tahoma", FontWeight.BOLD, 12));
         gridPane.add(birthDateLabel, 0, 5);
 
         birthDatePicker = new DatePicker();
@@ -114,6 +122,7 @@ public class MainWindow {
         gridPane.add(birthDatePicker, 1, 5);
 
         Label travelDateLabel = new Label("Departure Date: ");
+        travelDateLabel.setFont(Font.font("Tahoma", FontWeight.BOLD, 12));
         gridPane.add(travelDateLabel, 0, 6);
 
         travelDatePicker = new DatePicker();
@@ -132,6 +141,7 @@ public class MainWindow {
         gridPane.add(travelDatePicker, 1, 6);
 
         Label destinationLabel = new Label("Destination: ");
+        destinationLabel.setFont(Font.font("Tahoma", FontWeight.BOLD, 12));
         gridPane.add(destinationLabel, 0, 7);
 
         destinationBox = new ComboBox<>();
@@ -149,6 +159,7 @@ public class MainWindow {
         gridPane.add(destinationBox, 1, 7);
 
         Label departureTimeLabel = new Label("Departure Time: ");
+        departureTimeLabel.setFont(Font.font("Tahoma", FontWeight.BOLD, 12));
         gridPane.add(departureTimeLabel, 0, 8);
 
         departureTimeBox = new ComboBox<>();
@@ -169,14 +180,21 @@ public class MainWindow {
         buttonBox.setSpacing(10);
         buttonBox.setPadding(new Insets(15, 0, 0, 0));
         buttonBox.getChildren().addAll(submitButton, resetButton);
+
         gridPane.add(buttonBox, 1, 9);
     }
 
     private void showStage() {
 
         Scene scene = new Scene(gridPane, 450, 500);
+        Image planeBackground = new Image("airplane.jpg");
+        ImagePattern pattern = new ImagePattern(planeBackground);
+        scene.setFill(pattern);
+        scene.getStylesheets().add("style.css");
+
         stage.setScene(scene);
         stage.setTitle("Create Boarding Pass");
+        stage.getIcons().add(new Image("icon1.png"));
         stage.setResizable(false);
         stage.show();
     }
@@ -206,21 +224,21 @@ public class MainWindow {
     private void validateUserEntry() {
 
         if (fullNameField.getText().equals("")) {
-            AlertGenerator.generateAlert("Missing 'Full Name'", "The 'Full Name' field needs to be filled in");
+            AlertGenerator.generateAlert("Full Name");
         } else if (emailAddressField.getText().equals("")) {
-            AlertGenerator.generateAlert("Missing 'Email Address'", "The 'Email Address' field needs to be filled in");
+            AlertGenerator.generateAlert("Email Address");
         } else if (phoneNumberField.getText().equals("")) {
-            AlertGenerator.generateAlert("Missing 'Phone Number'", "The 'Phone Number' field needs to be filled in");
+            AlertGenerator.generateAlert("Phone Number");
         } else if (birthDatePicker.getValue() == null) {
-            AlertGenerator.generateAlert("Missing 'Birth Date'", "The 'Birth Date' field needs to be filled in");
+            AlertGenerator.generateAlert("Birth Date");
         } else if (travelDatePicker.getValue() == null) {
-            AlertGenerator.generateAlert("Missing 'Departure Date'", "The 'Departure Date' field needs to be filled in");
+            AlertGenerator.generateAlert("Departure Date");
         } else if (departureTimeBox.getValue() == null) {
-            AlertGenerator.generateAlert("Missing 'Departure Time'", "The 'Departure Time' field needs to be filled in");
+            AlertGenerator.generateAlert("Departure Time");
         } else if (destinationBox.getValue() == null) {
-            AlertGenerator.generateAlert("Missing 'Destination'", "The 'Destination' field needs to be filled in");
+            AlertGenerator.generateAlert("Destination");
         } else if (genderBox.getValue() == null) {
-            AlertGenerator.generateAlert("Missing 'Gender'", "The 'Gender' field needs to be filled in");
+            AlertGenerator.generateAlert("Gender");
         }
     }
 
