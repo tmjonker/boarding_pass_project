@@ -15,4 +15,6 @@ module com.example.demo {
     opens com.example.demo.departuretimes to javafx.fxml;
     exports com.example.demo.gui;
     opens com.example.demo.gui to javafx.fxml;
+    exports com.example.demo.gui.mainwindow;
+    opens com.example.demo.gui.mainwindow to javafx.fxml;
 }

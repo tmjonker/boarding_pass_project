@@ -1,30 +1,19 @@
-package com.example.demo.gui;
+package com.example.demo.gui.mainwindow;
 
 import com.example.demo.alertgenerator.AlertGenerator;
 import com.example.demo.departuretimes.DepartureTimes;
 import javafx.collections.FXCollections;
-import javafx.geometry.Insets;
-import javafx.geometry.Pos;
-import javafx.scene.Scene;
-import javafx.scene.canvas.Canvas;
 import javafx.scene.control.*;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.layout.*;
-import javafx.scene.paint.Color;
-import javafx.scene.paint.ImagePattern;
+import javafx.scene.layout.GridPane;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
-import javafx.scene.text.Text;
-import javafx.stage.Stage;
 
 import java.time.LocalDate;
 import java.time.Period;
 
-public class MainWindow {
+public class MainWindowFieldHandler {
 
-    private final Stage stage;
-    private GridPane gridPane;
+    public GridPane gridPane;
 
     private TextField fullNameField;
     private TextField emailAddressField;
@@ -33,41 +22,18 @@ public class MainWindow {
     private DatePicker birthDatePicker;
     private DatePicker travelDatePicker;
     private ComboBox<String> destinationBox;
+    private ComboBox<String> originBox;
     private ComboBox<String> departureTimeBox;
 
     private int age;
     private String departureDate;
 
-    public MainWindow(Stage stage) {
+    public MainWindowFieldHandler(GridPane gridPane) {
 
-        this.stage = stage;
-
-        generateWindow();
-        generateFields();
-        generateButtons();
-        showStage();
+        this.gridPane = gridPane;
     }
 
-    private void generateWindow() {
-
-        gridPane = new GridPane();
-        gridPane.setOpacity(0.85);
-        gridPane.setAlignment(Pos.CENTER);
-        gridPane.setHgap(10);
-        gridPane.setVgap(10);
-        gridPane.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, new BorderWidths(5))));
-
-        Image image = new Image("airplane.png");
-        ImageView imageView = new ImageView(image);
-
-        gridPane.add(imageView, 0, 0);
-
-        Text titleText = new Text("Create Boarding Pass");
-        titleText.setFont(Font.font("Tahoma", FontWeight.NORMAL, 18));
-        gridPane.add(titleText, 1, 0, 2, 1);
-    }
-
-    private void generateFields() {
+    public void generateFields() {
 
         Label fullNameLabel = new Label("Full Name: ");
         fullNameLabel.setFont(Font.font("Tahoma", FontWeight.BOLD, 12));
@@ -97,8 +63,7 @@ public class MainWindow {
         genderBox = new ComboBox<>();
         genderBox.getItems().addAll(
                 "Male",
-                "Female",
-                "Intersex"
+                "Female"
         );
         gridPane.add(genderBox, 1, 4);
 
@@ -108,7 +73,7 @@ public class MainWindow {
 
         birthDatePicker = new DatePicker();
         birthDatePicker.setOnAction(e -> {
-            getAge(); // assigns age value to age variable.
+            setAge(); // assigns age value to age variable.
         });
         // Prevents user from selecting a future date for their birthdate.
         birthDatePicker.setDayCellFactory(picker -> new DateCell() {
@@ -127,7 +92,7 @@ public class MainWindow {
 
         travelDatePicker = new DatePicker();
         travelDatePicker.setOnAction(e -> {
-            getTravelDate(); // assigns departure date to departureDate variable in 'YYYY-MM-DD' format.
+            setTravelDate(); // assigns departure date to departureDate variable in 'YYYY-MM-DD' format.
         });
         // Prevents user from selecting a past date for their departure date.
         travelDatePicker.setDayCellFactory(picker -> new DateCell() {
@@ -140,9 +105,27 @@ public class MainWindow {
         });
         gridPane.add(travelDatePicker, 1, 6);
 
+        Label originLabel = new Label("Origin: ");
+        originLabel.setFont(Font.font("Tahoma", FontWeight.BOLD, 12));
+        gridPane.add(originLabel, 0, 7);
+
+        originBox = new ComboBox<>();
+        originBox.getItems().addAll(
+                "ATL",
+                "DFW",
+                "DEN",
+                "ORD",
+                "LAX",
+                "CLT",
+                "LAS",
+                "PHX",
+                "MCO"
+        );
+        gridPane.add(originBox, 1, 7);
+
         Label destinationLabel = new Label("Destination: ");
         destinationLabel.setFont(Font.font("Tahoma", FontWeight.BOLD, 12));
-        gridPane.add(destinationLabel, 0, 7);
+        gridPane.add(destinationLabel, 0, 8);
 
         destinationBox = new ComboBox<>();
         destinationBox.getItems().addAll(
@@ -156,93 +139,42 @@ public class MainWindow {
                 "PHX",
                 "MCO"
         );
-        gridPane.add(destinationBox, 1, 7);
+        gridPane.add(destinationBox, 1, 8);
 
         Label departureTimeLabel = new Label("Departure Time: ");
         departureTimeLabel.setFont(Font.font("Tahoma", FontWeight.BOLD, 12));
-        gridPane.add(departureTimeLabel, 0, 8);
+        gridPane.add(departureTimeLabel, 0, 9);
 
         departureTimeBox = new ComboBox<>();
         // Generates a list of random departure times.
         departureTimeBox.setItems(FXCollections.observableArrayList(DepartureTimes.generateDepartureTimes()));
-        gridPane.add(departureTimeBox, 1, 8);
+        gridPane.add(departureTimeBox, 1, 9);
     }
 
-    private void generateButtons() {
-
-        Button submitButton = new Button("Submit");
-        submitButton.setOnAction(e -> onSubmitClick());
-
-        Button resetButton = new Button("Reset");
-        resetButton.setOnAction(e -> onResetClick());
-
-        HBox buttonBox = new HBox();
-        buttonBox.setSpacing(10);
-        buttonBox.setPadding(new Insets(15, 0, 0, 0));
-        buttonBox.getChildren().addAll(submitButton, resetButton);
-
-        gridPane.add(buttonBox, 1, 9);
-    }
-
-    private void showStage() {
-
-        Scene scene = new Scene(gridPane, 450, 500);
-        Image planeBackground = new Image("airplane.jpg");
-        ImagePattern pattern = new ImagePattern(planeBackground);
-        scene.setFill(pattern);
-        scene.getStylesheets().add("style.css");
-
-        stage.setScene(scene);
-        stage.setTitle("Create Boarding Pass");
-        stage.getIcons().add(new Image("icon1.png"));
-        stage.setResizable(false);
-        stage.show();
-    }
-
-    private void getAge() {
-
-        LocalDate currentDate = LocalDate.now();
-        LocalDate birthdate = birthDatePicker.getValue();
-
-        age = Period.between(birthdate, currentDate).getYears();
-    }
-
-    private void getTravelDate() {
-
-        departureDate = travelDatePicker.getValue().toString();
-        System.out.println(departureDate);
-    }
-
-    // Processes data that is entered by the user and generates the boarding pass.
-    private void onSubmitClick() {
-
-        validateUserEntry(); // checks form for missing entries and alerts user if any field is not filled in.
-
-        // process data and generate boarding pass.
-    }
-
-    private void validateUserEntry() {
+    public void checkForEmpty() {
 
         if (fullNameField.getText().equals("")) {
-            AlertGenerator.generateAlert("Full Name");
+            AlertGenerator.generateFieldAlert("Full Name");
         } else if (emailAddressField.getText().equals("")) {
-            AlertGenerator.generateAlert("Email Address");
+            AlertGenerator.generateFieldAlert("Email Address");
         } else if (phoneNumberField.getText().equals("")) {
-            AlertGenerator.generateAlert("Phone Number");
+            AlertGenerator.generateFieldAlert("Phone Number");
         } else if (birthDatePicker.getValue() == null) {
-            AlertGenerator.generateAlert("Birth Date");
+            AlertGenerator.generateFieldAlert("Birth Date");
         } else if (travelDatePicker.getValue() == null) {
-            AlertGenerator.generateAlert("Departure Date");
+            AlertGenerator.generateFieldAlert("Departure Date");
         } else if (departureTimeBox.getValue() == null) {
-            AlertGenerator.generateAlert("Departure Time");
+            AlertGenerator.generateFieldAlert("Departure Time");
         } else if (destinationBox.getValue() == null) {
-            AlertGenerator.generateAlert("Destination");
+            AlertGenerator.generateFieldAlert("Destination");
         } else if (genderBox.getValue() == null) {
-            AlertGenerator.generateAlert("Gender");
+            AlertGenerator.generateFieldAlert("Gender");
+        } else if (originBox.getValue() == null) {
+            AlertGenerator.generateFieldAlert("Origin");
         }
     }
 
-    private void onResetClick() {
+    public void resetFields() {
 
         fullNameField.setText("");
         emailAddressField.setText("");
@@ -252,5 +184,63 @@ public class MainWindow {
         departureTimeBox.setValue("");
         destinationBox.setValue("");
         genderBox.setValue("");
+    }
+
+    private void setAge() {
+
+        LocalDate currentDate = LocalDate.now();
+        LocalDate birthdate = birthDatePicker.getValue();
+
+        age = Period.between(birthdate, currentDate).getYears();
+    }
+
+    private void setTravelDate() {
+        // departure date is stored in YYYY-MM-DD format.
+        departureDate = travelDatePicker.getValue().toString();
+        System.out.println(departureDate);
+    }
+
+    public TextField getFullNameField() {
+        return fullNameField;
+    }
+
+    public TextField getEmailAddressField() {
+        return emailAddressField;
+    }
+
+    public TextField getPhoneNumberField() {
+        return phoneNumberField;
+    }
+
+    public ComboBox<String> getDepartureTimeBox() {
+        return departureTimeBox;
+    }
+
+    public ComboBox<String> getDestinationBox() {
+        return destinationBox;
+    }
+
+    public DatePicker getBirthDatePicker() {
+        return birthDatePicker;
+    }
+
+    public ComboBox<String> getOriginBox() {
+        return originBox;
+    }
+
+    public ComboBox<String> getGenderBox() {
+        return genderBox;
+    }
+
+    public DatePicker getTravelDatePicker() {
+        return travelDatePicker;
+    }
+
+    public String getDepartureDate() {
+        return departureDate;
+    }
+
+    public int getAge() {
+        return age;
     }
 }
