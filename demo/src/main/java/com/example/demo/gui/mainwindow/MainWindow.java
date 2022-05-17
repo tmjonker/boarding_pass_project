@@ -2,7 +2,7 @@ package com.example.demo.gui.mainwindow;
 
 import com.example.demo.BoardingPass.BoardingPass;
 import com.example.demo.BoardingPass.BoardingPassService;
-import com.example.demo.gui.FindBoardingPassWindow;
+import com.example.demo.gui.findboardingpasswindow.FindBoardingPassWindow;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;

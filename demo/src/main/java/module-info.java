@@ -9,12 +9,14 @@ module com.example.demo {
 
     opens com.example.demo to javafx.fxml;
     exports com.example.demo;
-    exports com.example.demo.alertgenerator;
-    opens com.example.demo.alertgenerator to javafx.fxml;
-    exports com.example.demo.departuretimes;
-    opens com.example.demo.departuretimes to javafx.fxml;
+    exports com.example.demo.gui.alertgenerator;
+    opens com.example.demo.gui.alertgenerator to javafx.fxml;
+    exports com.example.demo.gui.departuretimes;
+    opens com.example.demo.gui.departuretimes to javafx.fxml;
     exports com.example.demo.gui;
     opens com.example.demo.gui to javafx.fxml;
     exports com.example.demo.gui.mainwindow;
     opens com.example.demo.gui.mainwindow to javafx.fxml;
+    exports com.example.demo.gui.findboardingpasswindow;
+    opens com.example.demo.gui.findboardingpasswindow to javafx.fxml;
 }
