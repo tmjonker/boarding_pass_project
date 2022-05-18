@@ -45,6 +45,7 @@ public class BoardingPass {
         this.destination = destination;
         this.departureTime = departureTime;
         this.estimatedTimeOfArrival = calcETA(origin, destination);
+        ticketPrice = calcTicketPrice(80.00, age, gender);
 
         locations.put("ATL", 0.0);
         locations.put("DFW", 800.0);
