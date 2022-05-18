@@ -15,3 +15,5 @@ BoardingPass{name='sdfass', email='asdfaf', phoneNumber='sfdaf', gender=Male, ag
 BoardingPass{name='ssdfaddf', email='asdfaf', phoneNumber='asfdasf', gender=Male, age=3, boardingPassNumber=GOASG4, date='2022-05-17', origin='ORD', destination='LAX', departureTime='08:53', estimatedTimeOfArrival='11:53', ticketPrice=40.0}
 BoardingPass{name='sdfaf', email='asfasf@gmail.com', phoneNumber='777-777-7777', gender=Female, age=13, boardingPassNumber=X4KF82, date='2022-05-18', origin='DFW', destination='MCO', departureTime='12:26', estimatedTimeOfArrival='13:26', ticketPrice=60.0}
 BoardingPass{name='asdfas', email='sadfas@sfasf.com', phoneNumber='777-777-7777', gender=Male, age=0, boardingPassNumber=7HOGXM, date='2022-06-08', origin='ATL', destination='DFW', departureTime='13:59', estimatedTimeOfArrival='15:59', ticketPrice=40.0}
+
+BoardingPass{name='y', email='y@gmail.com', phoneNumber='777-777-7777', gender=Male, age=0, boardingPassNumber=YIMVW2, date='2022-05-19', origin='ATL', destination='ATL', departureTime='01:29', estimatedTimeOfArrival='1:29', ticketPrice=40.0}
