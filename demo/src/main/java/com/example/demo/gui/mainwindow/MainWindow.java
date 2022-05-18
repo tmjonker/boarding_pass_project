@@ -2,6 +2,7 @@ package com.example.demo.gui.mainwindow;
 
 import com.example.demo.BoardingPass.BoardingPass;
 import com.example.demo.BoardingPass.BoardingPassService;
+import com.example.demo.boardingpassgenerator.BoardingPassGenerator;
 import com.example.demo.gui.alertgenerator.AlertGenerator;
 import com.example.demo.gui.findboardingpasswindow.FindBoardingPassWindow;
 import javafx.geometry.Pos;
@@ -176,7 +177,8 @@ public class MainWindow {
 
             onResetClick(); // resets all fields to blanks.
 
-            System.out.println(boardingPass);
+            BoardingPassGenerator boardingPassGenerator = new BoardingPassGenerator(boardingPass);
+            boardingPassGenerator.generatePdf();
         }
     }
 
