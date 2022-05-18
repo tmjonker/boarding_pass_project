@@ -6,6 +6,10 @@ module com.example.demo {
     requires com.dlsc.formsfx;
     requires validatorfx;
     requires org.kordamp.bootstrapfx.core;
+    requires java.desktop;
+    requires barbecue;
+    requires pdfbox;
+    requires itextpdf;
 
     opens com.example.demo to javafx.fxml;
     exports com.example.demo;
@@ -17,9 +21,6 @@ module com.example.demo {
     opens com.example.demo.gui.mainwindow to javafx.fxml;
     exports com.example.demo.gui.findboardingpasswindow;
     opens com.example.demo.gui.findboardingpasswindow to javafx.fxml;
-<<<<<<< HEAD
     exports com.example.demo.boardingpassgenerator;
     opens com.example.demo.boardingpassgenerator to javafx.fxml;
-=======
->>>>>>> 21e90ac6399d7a4f2b4c34a81b060d63ff0dbac6
 }

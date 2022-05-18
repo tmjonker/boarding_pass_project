@@ -2,10 +2,7 @@ package com.example.demo.gui.mainwindow;
 
 import com.example.demo.BoardingPass.BoardingPass;
 import com.example.demo.BoardingPass.BoardingPassService;
-<<<<<<< HEAD
 import com.example.demo.boardingpassgenerator.BoardingPassGenerator;
-=======
->>>>>>> 21e90ac6399d7a4f2b4c34a81b060d63ff0dbac6
 import com.example.demo.gui.alertgenerator.AlertGenerator;
 import com.example.demo.gui.findboardingpasswindow.FindBoardingPassWindow;
 import javafx.geometry.Pos;
