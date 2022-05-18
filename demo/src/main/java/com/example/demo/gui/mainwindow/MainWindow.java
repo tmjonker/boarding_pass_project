@@ -2,6 +2,7 @@ package com.example.demo.gui.mainwindow;
 
 import com.example.demo.BoardingPass.BoardingPass;
 import com.example.demo.BoardingPass.BoardingPassService;
+import com.example.demo.BoardingPassGenerator.BoardingPassGenerator;
 import com.example.demo.gui.alertgenerator.AlertGenerator;
 import com.example.demo.gui.findboardingpasswindow.FindBoardingPassWindow;
 import javafx.geometry.Pos;
@@ -17,6 +18,9 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import org.controlsfx.control.StatusBar;
 
+import java.awt.*;
+import java.io.File;
+
 public class MainWindow {
 
     private final Stage stage;
@@ -27,7 +31,7 @@ public class MainWindow {
     private MainWindowMenuHandler mainWindowMenuHandler;
     private MainWindowButtonHandler mainWindowButtonHandler;
 
-    StatusBar statusBar;
+    private StatusBar statusBar;
 
     public MainWindow(Stage stage) {
 
@@ -174,9 +178,10 @@ public class MainWindow {
                 AlertGenerator.generateErrorDialog("Failed to generate boarding pass");
             }
 
-            onResetClick(); // resets all fields to blanks.
+//            onResetClick(); // resets all fields to blanks.
 
-            System.out.println(boardingPass);
+            BoardingPassGenerator boardingPassGenerator = new BoardingPassGenerator(boardingPass);
+            boardingPassGenerator.generatePdf();
         }
     }
 
