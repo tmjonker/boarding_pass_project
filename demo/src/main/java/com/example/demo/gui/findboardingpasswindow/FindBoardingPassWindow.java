@@ -98,7 +98,7 @@ public class FindBoardingPassWindow {
         if (boardingPass != null) {
             AlertGenerator.generateSuccessDialog("Boarding Pass has been located.");
         } else {
-            AlertGenerator.generateErrorDialog("Boarding pass could not be located.");
+            AlertGenerator.generateBoardingPassAlert(boardingPassNumber);
         }
 
         System.out.println(boardingPass);
