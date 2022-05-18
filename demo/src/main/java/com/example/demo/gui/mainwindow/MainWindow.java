@@ -15,6 +15,7 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import org.controlsfx.control.StatusBar;
 
 public class MainWindow {
 
@@ -25,6 +26,8 @@ public class MainWindow {
     private MainWindowFieldHandler mainWindowFieldHandler;
     private MainWindowMenuHandler mainWindowMenuHandler;
     private MainWindowButtonHandler mainWindowButtonHandler;
+
+    StatusBar statusBar;
 
     public MainWindow(Stage stage) {
 
@@ -42,6 +45,9 @@ public class MainWindow {
         mainWindowButtonHandler = new MainWindowButtonHandler(gridPane);
         mainWindowButtonHandler.generateButtons();
         addFunctionalityToButtons();
+
+        generateStatusBar();
+        generateMouseOverHandlers();
 
         showStage();
     }
@@ -69,6 +75,43 @@ public class MainWindow {
         gridPane.add(titleText, 1, 0, 2, 1);
     }
 
+    private void generateStatusBar() {
+
+        statusBar = new StatusBar();
+        statusBar.setText("");
+        borderPane.setBottom(statusBar);
+    }
+
+    private void generateMouseOverHandlers() {
+
+        mainWindowFieldHandler.getFullNameField().setOnMouseEntered(e -> statusBar.setText("Enter your full name."));
+        mainWindowFieldHandler.getFullNameField().setOnMouseExited(e -> statusBar.setText(""));
+
+        mainWindowFieldHandler.getEmailAddressField().setOnMouseEntered(e -> statusBar.setText("Enter your email address."));
+        mainWindowFieldHandler.getEmailAddressField().setOnMouseExited(e -> statusBar.setText(""));
+
+        mainWindowFieldHandler.getPhoneNumberField().setOnMouseEntered(e -> statusBar.setText("Enter your phone number."));
+        mainWindowFieldHandler.getPhoneNumberField().setOnMouseExited(e -> statusBar.setText(""));
+
+        mainWindowFieldHandler.getGenderBox().setOnMouseEntered(e -> statusBar.setText("Select your gender."));
+        mainWindowFieldHandler.getGenderBox().setOnMouseExited(e -> statusBar.setText(""));
+
+        mainWindowFieldHandler.getBirthDatePicker().setOnMouseEntered(e -> statusBar.setText("Select your birthdate."));
+        mainWindowFieldHandler.getBirthDatePicker().setOnMouseExited(e -> statusBar.setText(""));
+
+        mainWindowFieldHandler.getTravelDatePicker().setOnMouseEntered(e -> statusBar.setText("Select a departure date."));
+        mainWindowFieldHandler.getTravelDatePicker().setOnMouseExited(e -> statusBar.setText(""));
+
+        mainWindowFieldHandler.getOriginBox().setOnMouseEntered(e -> statusBar.setText("Select an origin."));
+        mainWindowFieldHandler.getOriginBox().setOnMouseExited(e -> statusBar.setText(""));
+
+        mainWindowFieldHandler.getDestinationBox().setOnMouseEntered(e -> statusBar.setText("Select a destination."));
+        mainWindowFieldHandler.getDestinationBox().setOnMouseExited(e -> statusBar.setText(""));
+
+        mainWindowFieldHandler.getDepartureTimeBox().setOnMouseEntered(e -> statusBar.setText("Select a departure time."));
+        mainWindowFieldHandler.getDepartureTimeBox().setOnMouseExited(e -> statusBar.setText(""));
+    }
+
     private void addFunctionalityToButtons() {
 
         mainWindowButtonHandler.getResetButton().setOnAction(e -> onResetClick());
@@ -85,7 +128,7 @@ public class MainWindow {
 
     private void showStage() {
 
-        Scene scene = new Scene(borderPane, 450, 500);
+        Scene scene = new Scene(borderPane, 450, 530);
         Image planeBackground = new Image("airplane.jpg");
         ImagePattern pattern = new ImagePattern(planeBackground);
         scene.setFill(pattern);

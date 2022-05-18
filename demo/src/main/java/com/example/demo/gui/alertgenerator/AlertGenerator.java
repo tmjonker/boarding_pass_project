@@ -1,6 +1,8 @@
 package com.example.demo.gui.alertgenerator;
 
 import javafx.scene.control.Alert;
+import javafx.scene.image.Image;
+import javafx.stage.Stage;
 
 public class AlertGenerator {
 
@@ -10,6 +12,9 @@ public class AlertGenerator {
         alert.setTitle("Missing " + title);
         alert.setHeaderText("Error");
         alert.setContentText("The " + title + " field must be filled out.");
+
+        Stage stage = (Stage) alert.getDialogPane().getScene().getWindow();
+        stage.getIcons().add(new Image("icon1.png"));
 
         alert.showAndWait();
     }
@@ -21,6 +26,9 @@ public class AlertGenerator {
         alert.setHeaderText("Error");
         alert.setContentText("Cannot find a boarding pass with the number " + title);
 
+        Stage stage = (Stage) alert.getDialogPane().getScene().getWindow();
+        stage.getIcons().add(new Image("icon1.png"));
+
         alert.showAndWait();
     }
 
@@ -31,6 +39,9 @@ public class AlertGenerator {
         alert.setHeaderText("Success!");
         alert.setContentText(title);
 
+        Stage stage = (Stage) alert.getDialogPane().getScene().getWindow();
+        stage.getIcons().add(new Image("icon1.png"));
+
         alert.showAndWait();
     }
 
@@ -40,6 +51,9 @@ public class AlertGenerator {
         alert.setTitle("Error");
         alert.setHeaderText("Error!");
         alert.setContentText(title);
+
+        Stage stage = (Stage) alert.getDialogPane().getScene().getWindow();
+        stage.getIcons().add(new Image("icon1.png"));
 
         alert.showAndWait();
     }
