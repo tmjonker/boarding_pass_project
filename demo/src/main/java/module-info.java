@@ -6,7 +6,10 @@ module com.example.demo {
     requires com.dlsc.formsfx;
     requires validatorfx;
     requires org.kordamp.bootstrapfx.core;
-
+    requires java.desktop;
+    requires barbecue;
+    requires pdfbox;
+    requires itextpdf;
     opens com.example.demo to javafx.fxml;
     exports com.example.demo;
     exports com.example.demo.gui.alertgenerator;
