@@ -29,5 +29,9 @@ BoardingPass{name='sdfafaf', email='asdfas@sfasfas.com', phoneNumber='777-777-77
 BoardingPass{name='fdsaf', email='sdfaf@asdfa.com', phoneNumber='777-777-7777', gender=Male, age=0, boardingPassNumber=IBP2JV, date='2022-05-18', origin='DFW', destination='DEN', departureTime='12:57', estimatedTimeOfArrival='14:57', ticketPrice=40.0}
 BoardingPass{name='sdfa', email='sdfa@asdfa.com', phoneNumber='777-777-7777', gender=Male, age=20, boardingPassNumber=0KVOCE, date='2022-05-18', origin='DFW', destination='LAS', departureTime='14:19', estimatedTimeOfArrival='17:19', ticketPrice=80.0}
 BoardingPass{name='dfafa', email='asdfa@sdfaf.com', phoneNumber='777-777-7777', gender=Male, age=13, boardingPassNumber=X77TWU, date='2022-05-18', origin='DEN', destination='CLT', departureTime='11:00', estimatedTimeOfArrival='14:0', ticketPrice=80.0}
+BoardingPass{name='asdfa', email='sdfafa@asdfaf.com', phoneNumber='777-777-7777', gender=Male, age=7, boardingPassNumber=I0XKFQ, date='2022-05-19', origin='ORD', destination='CLT', departureTime='13:23', estimatedTimeOfArrival='14:23', ticketPrice=40.0}
+BoardingPass{name='grapejuice', email='grapejuice@grapes.com', phoneNumber='777-777-7777', gender=Female, age=7, boardingPassNumber=GD7JTR, date='2022-05-18', origin='CLT', destination='LAS', departureTime='16:33', estimatedTimeOfArrival='20:33', ticketPrice=30.0}
 =======
 >>>>>>> 21e90ac6399d7a4f2b4c34a81b060d63ff0dbac6
+BoardingPass{name='james gosling', email='james@gosling.com', phoneNumber='777-777-7777', gender=Male, age=14, boardingPassNumber=S1D1KY, date='2022-05-18', origin='ATL', destination='LAX', departureTime='10:19', estimatedTimeOfArrival='15:19', ticketPrice=80.0}
+BoardingPass{name='James gosling', email='james@gosling.com', phoneNumber='777-777-7777', gender=Male, age=29, boardingPassNumber=VL3J1X, date='2022-05-18', origin='ATL', destination='ORD', departureTime='09:53', estimatedTimeOfArrival='11:53', ticketPrice=80.0}
