@@ -12,6 +12,5 @@ public class BarcodeGenerator {
         Barcode barcode = BarcodeFactory.createCode128(barcodeText);
 
         return BarcodeImageHandler.getImage(barcode);
-
     }
 }

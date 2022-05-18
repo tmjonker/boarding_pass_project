@@ -26,7 +26,7 @@ public class BoardingPassService extends BoardingPass{
             lines = (ArrayList<String>) Files.readAllLines(Paths.get("src/main/resources/RawBoardingPasses.txt"));
         }catch (Exception e)
         {
-            System.out.println(e.getMessage());
+            System.out.println("line 29");
             return null;
         }
         for(var line : lines)
@@ -392,7 +392,7 @@ public class BoardingPassService extends BoardingPass{
             }
         }catch (Exception e)
         {
-            System.out.println(e.getMessage());
+            System.out.println("395");
         }
         return boardingPassNumbers;
     }

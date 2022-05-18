@@ -229,7 +229,7 @@ public class BoardingPass {
     public void writeToFile()
     {
         try{
-            FileWriter fw = new FileWriter("demo/src/main/resources/RawBoardingPasses.txt",true);
+            FileWriter fw = new FileWriter("src/main/resources/RawBoardingPasses.txt",true);
             BufferedWriter bw = new BufferedWriter(fw);
             bw.write(this.toString());
             bw.newLine();
