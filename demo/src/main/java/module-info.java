@@ -21,6 +21,6 @@ module com.example.demo {
     opens com.example.demo.gui.mainwindow to javafx.fxml;
     exports com.example.demo.gui.findboardingpasswindow;
     opens com.example.demo.gui.findboardingpasswindow to javafx.fxml;
-    exports com.example.demo.BoardingPassGenerator;
-    opens com.example.demo.BoardingPassGenerator to javafx.fxml;
+    exports com.example.demo.boardingpassgenerator;
+    opens com.example.demo.boardingpassgenerator to javafx.fxml;
 }

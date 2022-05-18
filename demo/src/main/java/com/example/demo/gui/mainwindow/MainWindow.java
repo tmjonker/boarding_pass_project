@@ -2,7 +2,7 @@ package com.example.demo.gui.mainwindow;
 
 import com.example.demo.BoardingPass.BoardingPass;
 import com.example.demo.BoardingPass.BoardingPassService;
-import com.example.demo.BoardingPassGenerator.BoardingPassGenerator;
+import com.example.demo.boardingpassgenerator.BoardingPassGenerator;
 import com.example.demo.gui.alertgenerator.AlertGenerator;
 import com.example.demo.gui.findboardingpasswindow.FindBoardingPassWindow;
 import javafx.geometry.Pos;
@@ -17,9 +17,6 @@ import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import org.controlsfx.control.StatusBar;
-
-import java.awt.*;
-import java.io.File;
 
 public class MainWindow {
 
