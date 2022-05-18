@@ -33,9 +33,7 @@ public class BoardingPass {
                         String date,
                         String origin,
                         String destination,
-                        String departureTime,
-                        double ticketPrice,
-                        String estimatedTimeOfArrival) {
+                        String departureTime) {
         this.name = name;
         this.email = email;
         this.phoneNumber = phoneNumber;
@@ -46,8 +44,7 @@ public class BoardingPass {
         this.origin = origin;
         this.destination = destination;
         this.departureTime = departureTime;
-        this.ticketPrice = ticketPrice;
-        this.estimatedTimeOfArrival = estimatedTimeOfArrival;
+        this.estimatedTimeOfArrival = calcETA(origin, destination);
 
         locations.put("ATL", 0.0);
         locations.put("DFW", 800.0);

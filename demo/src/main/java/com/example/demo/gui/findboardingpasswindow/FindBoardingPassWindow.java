@@ -10,9 +10,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
-import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
@@ -91,7 +89,7 @@ public class FindBoardingPassWindow {
         String boardingPassNumber = boardingPassNumberField.getText();
         BoardingPass boardingPass = null;
 
-        if (!boardingPassNumber.equals("")) {
+        if (!boardingPassNumber.equals("")) { // if boarding pass field is not blank then search for boarding pass.
             boardingPass = boardingPassService.searchFileForPass(boardingPassNumber);
         } else {
             AlertGenerator.generateFieldAlert("Boarding Pass Number");
@@ -102,7 +100,7 @@ public class FindBoardingPassWindow {
         } else {
             AlertGenerator.generateErrorDialog("Boarding pass could not be located.");
         }
-        
+
         System.out.println(boardingPass);
         stage.close();
     }
