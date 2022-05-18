@@ -384,4 +384,25 @@ public class BoardingPassService extends BoardingPass{
     public ArrayList<BoardingPass> getPasses() {
         return passes;
     }
+
+    public ArrayList<String> getAllBoardingPassNumbers()
+    {
+        ArrayList<String> boardingPassNumbers = new ArrayList<>();
+        for(var i : passes)
+        {
+            boardingPassNumbers.add(i.getBoardingPassNumber());
+        }
+        try{
+            ArrayList<String> lines = (ArrayList<String>) Files.readAllLines(Paths.get("src/main/resources/RawBoardingPasses.txt"));
+            for(var line: lines)
+            {
+                BoardingPass pass = makeBoardingPassFromString(line);
+                boardingPassNumbers.add(pass.getBoardingPassNumber());
+            }
+        }catch (Exception e)
+        {
+            System.out.println(e.getMessage());
+        }
+        return boardingPassNumbers;
+    }
 }
