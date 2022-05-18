@@ -118,8 +118,11 @@ public class MainWindow {
         String destination = mainWindowFieldHandler.getDestinationBox().getValue();
         String departureTime = mainWindowFieldHandler.getDepartureTimeBox().getValue();
 
+        System.out.println(departureTime);
         BoardingPass boardingPass = new BoardingPass(name, email, phoneNumber, gender, age, boardingPassNumber,
                 departureDate, origin, destination, departureTime);
+
+
 
         boardingPass.writeToFile();
 

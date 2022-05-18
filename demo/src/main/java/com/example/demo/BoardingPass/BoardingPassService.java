@@ -318,18 +318,18 @@ public class BoardingPassService extends BoardingPass{
 
     public String check(ArrayList<BoardingPass> x, String y){//used to check if ID is taken
         //quick test case delete later
-        String nameS = "y";
-        String emailS = "t@gmail.com";
-        String phoneNumberS = "8880344456";
-        String genderS = "F";
-        int ageS = 20;
-        String boardingPassNumberS = "JQWX23";
-        String dateS = "5-20-2022";
-        String originS = "LAX";
-        String destinationS = "ATL";
-        String departureTimeS = "9:30 PM";
-        String eta = getEstimatedTimeOfArrival();
-        passes.add(new BoardingPass(nameS, emailS, phoneNumberS, genderS, ageS, boardingPassNumberS, dateS, originS, destinationS, departureTimeS));
+//        String nameS = "y";
+//        String emailS = "t@gmail.com";
+//        String phoneNumberS = "8880344456";
+//        String genderS = "F";
+//        int ageS = 20;
+//        String boardingPassNumberS = "JQWX23";
+//        String dateS = "5-20-2022";
+//        String originS = "LAX";
+//        String destinationS = "ATL";
+//        String departureTimeS = "9:30 PM";
+//        String eta = getEstimatedTimeOfArrival();
+//        //passes.add(new BoardingPass(nameS, emailS, phoneNumberS, genderS, ageS, boardingPassNumberS, dateS, originS, destinationS, departureTimeS));
 
         for(int i = 0; i < x.size(); i++){
             if(passes.get(i).getBoardingPassNumber() == y){
