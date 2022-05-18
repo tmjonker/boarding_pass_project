@@ -146,20 +146,11 @@ public class BoardingPassService extends BoardingPass{
         {
             return false;
         }
-        if(Integer.parseInt(firstSplit[0])<=0 || Integer.parseInt(firstSplit[0])>12)
+        if(Integer.parseInt(firstSplit[0])<0 || Integer.parseInt(firstSplit[0])>24)
         {
             return false;
         }
-        String[] secondSplit = firstSplit[1].split(" ");
-        if(secondSplit.length!=2)
-        {
-            return false;
-        }
-        if(Integer.parseInt(secondSplit[0])<0 || Integer.parseInt(firstSplit[0])>59)
-        {
-            return false;
-        }
-        if(!secondSplit[1].equals("AM") && !secondSplit[1].equals("PM"))
+        if(Integer.parseInt(firstSplit[1])<=0 || Integer.parseInt(firstSplit[1])>59)
         {
             return false;
         }
@@ -223,7 +214,7 @@ public class BoardingPassService extends BoardingPass{
 
         String gender ="";
 
-        System.out.println("Please enter your gender F for female, M for male");
+        System.out.println("Please enter your gender(Male or Female)");
         do{
             try {
                 gender=scan.nextLine();
@@ -290,7 +281,7 @@ public class BoardingPassService extends BoardingPass{
         }while(destination.equals(""));
         String departureTime ="";
 
-        System.out.println("Please enter your departure time. Ex. 9:30 PM");
+        System.out.println("Please enter your departure time in military time");
         do{
             try {
                 departureTime = scan.nextLine();
@@ -332,7 +323,7 @@ public class BoardingPassService extends BoardingPass{
 //        //passes.add(new BoardingPass(nameS, emailS, phoneNumberS, genderS, ageS, boardingPassNumberS, dateS, originS, destinationS, departureTimeS));
 
         for(int i = 0; i < x.size(); i++){
-            if(passes.get(i).getBoardingPassNumber() == y){
+            if(x.get(i).getBoardingPassNumber().equals(y)){
                 y = ""; //clear, change, and return new set
                 y = chars();
                 break;
@@ -362,8 +353,8 @@ public class BoardingPassService extends BoardingPass{
                 x += sample;
             }
         }
-
-        x = check(passes, x);
+        ArrayList<BoardingPass> allBoardingPassNumbers = getAllBoardingPassNumbers();
+        x = check(allBoardingPassNumbers, x);
 
         return x;
     }
@@ -385,19 +376,19 @@ public class BoardingPassService extends BoardingPass{
         return passes;
     }
 
-    public ArrayList<String> getAllBoardingPassNumbers()
+    public ArrayList<BoardingPass> getAllBoardingPassNumbers()
     {
-        ArrayList<String> boardingPassNumbers = new ArrayList<>();
+        ArrayList<BoardingPass> boardingPassNumbers = new ArrayList<>();
         for(var i : passes)
         {
-            boardingPassNumbers.add(i.getBoardingPassNumber());
+            boardingPassNumbers.add(i);
         }
         try{
             ArrayList<String> lines = (ArrayList<String>) Files.readAllLines(Paths.get("src/main/resources/RawBoardingPasses.txt"));
             for(var line: lines)
             {
                 BoardingPass pass = makeBoardingPassFromString(line);
-                boardingPassNumbers.add(pass.getBoardingPassNumber());
+                boardingPassNumbers.add(pass);
             }
         }catch (Exception e)
         {

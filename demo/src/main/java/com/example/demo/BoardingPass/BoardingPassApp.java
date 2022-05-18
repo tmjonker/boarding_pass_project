@@ -24,10 +24,10 @@ public class BoardingPassApp {
         System.out.println(boardingPassService.searchFileForPass("TKE50M"));
         System.out.println(boardingPassService.searchFileForPass("GVKW4R"));
         System.out.println(boardingPassService.searchFileForPass("7FCA6Q"));
-        ArrayList<String> boardingPassNumbers = boardingPassService.getAllBoardingPassNumbers();
+        ArrayList<BoardingPass> boardingPassNumbers = boardingPassService.getAllBoardingPassNumbers();
         for(var number:boardingPassNumbers)
         {
-            System.out.println(number);
+            System.out.println(number.getBoardingPassNumber());
         }
     }
 }
