@@ -153,27 +153,50 @@ public class MainWindowFieldHandler {
         gridPane.add(departureTimeBox, 1, 9);
     }
 
-    public void checkForEmpty() {
+    public boolean checkForEmpty() {
 
         if (fullNameField.getText().equals("")) {
             AlertGenerator.generateFieldAlert("Full Name");
+            return false;
         } else if (emailAddressField.getText().equals("")) {
             AlertGenerator.generateFieldAlert("Email Address");
+            return false;
         } else if (phoneNumberField.getText().equals("")) {
             AlertGenerator.generateFieldAlert("Phone Number");
+            return false;
         } else if (birthDatePicker.getValue() == null) {
             AlertGenerator.generateFieldAlert("Birth Date");
+            return false;
         } else if (travelDatePicker.getValue() == null) {
             AlertGenerator.generateFieldAlert("Departure Date");
+            return false;
         } else if (departureTimeBox.getValue() == null) {
             AlertGenerator.generateFieldAlert("Departure Time");
+            return false;
         } else if (destinationBox.getValue() == null) {
             AlertGenerator.generateFieldAlert("Destination");
+            return false;
         } else if (genderBox.getValue() == null) {
             AlertGenerator.generateFieldAlert("Gender");
+            return false;
         } else if (originBox.getValue() == null) {
             AlertGenerator.generateFieldAlert("Origin");
+            return false;
         }
+
+        return true;
+    }
+
+    public boolean validateDataEntry() {
+        if (!phoneNumberField.getText().matches("^[\\+]?[(]?[0-9]{3}[)]?[-\\s\\.]?[0-9]{3}[-\\s\\.]?[0-9]{4,6}$")) {
+            AlertGenerator.generateErrorDialog("Phone number provided in wrong format");
+            return false;
+        } else if (!emailAddressField.getText().matches("[^@ \\t\\r\\n]+@[^@ \\t\\r\\n]+\\.[^@ \\t\\r\\n]+")) {
+            AlertGenerator.generateErrorDialog("Email provided in wrong format");
+            return false;
+        }
+
+        return true;
     }
 
     public void resetFields() {
@@ -200,7 +223,6 @@ public class MainWindowFieldHandler {
     private void setTravelDate() {
         // departure date is stored in YYYY-MM-DD format.
         departureDate = travelDatePicker.getValue().toString();
-        System.out.println(departureDate);
     }
 
     public TextField getFullNameField() {

@@ -101,47 +101,49 @@ public class MainWindow {
     // Processes data that is entered by the user and generates the boarding pass.
     private void onSubmitClick() {
 
-        validateUserEntry(); // checks form for missing entries and alerts user if any field is not filled in.
+        if (validateUserEntry()) { // checks form for missing entries and alerts user if any field is not filled in.
 
-        // process data and generate boarding pass.
+            // process data and generate boarding pass.
 
-        BoardingPassService boardingPassService = new BoardingPassService();
+            BoardingPassService boardingPassService = new BoardingPassService();
 
-        String name = mainWindowFieldHandler.getFullNameField().getText();
-        String email = mainWindowFieldHandler.getEmailAddressField().getText();
-        String phoneNumber = mainWindowFieldHandler.getPhoneNumberField().getText();
-        String gender = mainWindowFieldHandler.getGenderBox().getValue();
-        int age = mainWindowFieldHandler.getAge();
-        String boardingPassNumber = boardingPassService.chars();
-        String departureDate = mainWindowFieldHandler.getDepartureDate();
-        String origin = mainWindowFieldHandler.getOriginBox().getValue();
-        String destination = mainWindowFieldHandler.getDestinationBox().getValue();
-        String departureTime = mainWindowFieldHandler.getDepartureTimeBox().getValue();
+            String name = mainWindowFieldHandler.getFullNameField().getText();
+            String email = mainWindowFieldHandler.getEmailAddressField().getText();
+            String phoneNumber = mainWindowFieldHandler.getPhoneNumberField().getText();
+            String gender = mainWindowFieldHandler.getGenderBox().getValue();
+            int age = mainWindowFieldHandler.getAge();
+            String boardingPassNumber = boardingPassService.chars();
+            String departureDate = mainWindowFieldHandler.getDepartureDate();
+            String origin = mainWindowFieldHandler.getOriginBox().getValue();
+            String destination = mainWindowFieldHandler.getDestinationBox().getValue();
+            String departureTime = mainWindowFieldHandler.getDepartureTimeBox().getValue();
 
-        System.out.println(departureTime);
-        BoardingPass boardingPass = new BoardingPass(name, email, phoneNumber, gender, age, boardingPassNumber,
-                departureDate, origin, destination, departureTime);
+            BoardingPass boardingPass = new BoardingPass(name, email, phoneNumber, gender, age, boardingPassNumber,
+                    departureDate, origin, destination, departureTime);
 
+            boardingPass.writeToFile();
 
+            boardingPass = boardingPassService.searchFileForPass(boardingPassNumber);
 
-        boardingPass.writeToFile();
+            if (boardingPass != null) {
+                AlertGenerator.generateSuccessDialog("Boarding Pass has been generated.");
+            } else {
+                AlertGenerator.generateErrorDialog("Failed to generate boarding pass");
+            }
 
-        boardingPass = boardingPassService.searchFileForPass(boardingPassNumber);
+            onResetClick(); // resets all fields to blanks.
 
-        if (boardingPass != null) {
-            AlertGenerator.generateSuccessDialog("Boarding Pass has been generated.");
-        } else {
-            AlertGenerator.generateErrorDialog("Failed to generate boarding pass");
+            System.out.println(boardingPass);
         }
-
-        onResetClick(); // resets all fields to blanks.
-
-        System.out.println(boardingPass);
     }
 
-    private void validateUserEntry() {
+    private boolean validateUserEntry() {
 
-        mainWindowFieldHandler.checkForEmpty();
+        if (mainWindowFieldHandler.checkForEmpty() && mainWindowFieldHandler.validateDataEntry()) {
+            return true; // true if error free
+        } else {
+            return false; // false if there are errors.
+        }
     }
 
     private void onResetClick() {
