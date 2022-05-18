@@ -10,7 +10,6 @@ module com.example.demo {
     requires barbecue;
     requires pdfbox;
     requires itextpdf;
-
     opens com.example.demo to javafx.fxml;
     exports com.example.demo;
     exports com.example.demo.gui.alertgenerator;
@@ -21,6 +20,4 @@ module com.example.demo {
     opens com.example.demo.gui.mainwindow to javafx.fxml;
     exports com.example.demo.gui.findboardingpasswindow;
     opens com.example.demo.gui.findboardingpasswindow to javafx.fxml;
-    exports com.example.demo.boardingpassgenerator;
-    opens com.example.demo.boardingpassgenerator to javafx.fxml;
 }

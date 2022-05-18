@@ -162,10 +162,9 @@ public class BoardingPass {
         }
 
         time = (int) Math.round(Math.abs((dest - base) / 400)); //get mile difference between origin and destination divided by speed of plane to get eta
-        eta = String.valueOf(time);
         String dep = getDepartureTime();
 
-        List<Integer> temp = new ArrayList<>();
+        List<Integer> temp;
         temp = Arrays.stream(dep.split(":")).map(x-> Integer.parseInt(x)).collect(Collectors.toList());
 
         int digit = temp.get(0) + time;
@@ -174,8 +173,11 @@ public class BoardingPass {
             digit = digit % 24;//get remainder
         }
 
-        eta = digit + ":" + temp.get(1); // should be outputting time of arrival based on when leaving airport
-
+        if(String.valueOf(digit).length() == 1) {
+            eta = "0" + digit + ":" + temp.get(1);
+        }else{
+            eta = digit + ":" + temp.get(1); // should be outputting time of arrival based on when leaving airport
+        }
         return eta;
     }
 
@@ -227,7 +229,7 @@ public class BoardingPass {
     public void writeToFile()
     {
         try{
-            FileWriter fw = new FileWriter("src/main/resources/RawBoardingPasses.txt",true);
+            FileWriter fw = new FileWriter("demo/src/main/resources/RawBoardingPasses.txt",true);
             BufferedWriter bw = new BufferedWriter(fw);
             bw.write(this.toString());
             bw.newLine();
