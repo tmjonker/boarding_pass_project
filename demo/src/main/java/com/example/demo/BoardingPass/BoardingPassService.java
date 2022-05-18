@@ -87,7 +87,7 @@ public class BoardingPassService extends BoardingPass{
                 case "departureTime":
                     ret.setDepartureTime(temp[1]);
                     break;
-                case "estimatedTimeofArrival":
+                case "estimatedTimeOfArrival":
                     ret.setEstimatedTimeOfArrival(temp[1]);
                     break;
                 case "ticketPrice":
