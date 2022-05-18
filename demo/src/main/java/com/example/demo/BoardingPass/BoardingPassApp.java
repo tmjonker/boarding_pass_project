@@ -1,5 +1,6 @@
 package com.example.demo.BoardingPass;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class BoardingPassApp {
@@ -19,8 +20,14 @@ public class BoardingPassApp {
         {
             pass.writeToFile();
         }
+
         System.out.println(boardingPassService.searchFileForPass("TKE50M"));
         System.out.println(boardingPassService.searchFileForPass("GVKW4R"));
         System.out.println(boardingPassService.searchFileForPass("7FCA6Q"));
+        ArrayList<String> boardingPassNumbers = boardingPassService.getAllBoardingPassNumbers();
+        for(var number:boardingPassNumbers)
+        {
+            System.out.println(number);
+        }
     }
 }
