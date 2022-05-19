@@ -18,6 +18,9 @@ import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 
+import java.awt.*;
+import java.io.File;
+
 public class FindBoardingPassWindow {
 
     private Stage stage;
@@ -100,8 +103,24 @@ public class FindBoardingPassWindow {
         } else {
             AlertGenerator.generateBoardingPassAlert(boardingPassNumber);
         }
+        File boardingPassFile = new File("boarding-pass.pdf");
 
-        System.out.println(boardingPass);
+        new Thread(() -> {
+
+            try {
+                if (Desktop.isDesktopSupported()) {
+
+                    Desktop desktop = Desktop.getDesktop();
+                    desktop.open(boardingPassFile);
+                } else {
+                    System.out.println("not supported.");
+                }
+            } catch (Exception ex) {
+                System.out.println(ex.getMessage());
+            }
+
+        }).start();
+
         stage.close();
     }
 }

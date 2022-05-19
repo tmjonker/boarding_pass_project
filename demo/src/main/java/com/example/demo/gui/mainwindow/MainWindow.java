@@ -18,6 +18,9 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import org.controlsfx.control.StatusBar;
 
+import java.awt.*;
+import java.io.File;
+
 public class MainWindow {
 
     private final Stage stage;
@@ -179,6 +182,24 @@ public class MainWindow {
 
             BoardingPassGenerator boardingPassGenerator = new BoardingPassGenerator(boardingPass);
             boardingPassGenerator.generatePdf();
+
+            File boardingPassFile = new File("boarding-pass.pdf");
+
+            new Thread(() -> {
+
+                try {
+                    if (Desktop.isDesktopSupported()) {
+
+                        Desktop desktop = Desktop.getDesktop();
+                        desktop.open(boardingPassFile);
+                    } else {
+                        System.out.println("not supported.");
+                    }
+                } catch (Exception ex) {
+                    System.out.println(ex.getMessage());
+                }
+
+            }).start();
         }
     }
 
