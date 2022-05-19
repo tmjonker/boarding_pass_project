@@ -2,11 +2,9 @@ package com.example.demo.boardingpassgenerator;
 
 import com.example.demo.BoardingPass.BoardingPass;
 import com.example.demo.barcodegenerator.BarcodeGenerator;
-import com.itextpdf.text.Chunk;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.Image;
 import com.itextpdf.text.Paragraph;
-import com.itextpdf.text.pdf.Barcode128;
 import com.itextpdf.text.pdf.PdfWriter;
 
 import javax.imageio.ImageIO;
@@ -53,7 +51,7 @@ public class BoardingPassGenerator {
 
         BufferedImage bi = null;
         try {
-            bi = BarcodeGenerator.generateEAN13BarcodeImage(boardingPass.getBoardingPassNumber());
+            bi = BarcodeGenerator.generateCode128BarcodeImage(boardingPass.getBoardingPassNumber());
         } catch (Exception ex) {
             ex.printStackTrace();
         }

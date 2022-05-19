@@ -8,7 +8,7 @@ import java.awt.image.BufferedImage;
 
 public class BarcodeGenerator {
 
-    public static BufferedImage generateEAN13BarcodeImage(String barcodeText) throws Exception {
+    public static BufferedImage generateCode128BarcodeImage(String barcodeText) throws Exception {
         Barcode barcode = BarcodeFactory.createCode128(barcodeText);
 
         return BarcodeImageHandler.getImage(barcode);
