@@ -154,7 +154,7 @@ public class BoardingPassService extends BoardingPass{
         {
             return false;
         }
-        if(Integer.parseInt(firstSplit[1])<=0 || Integer.parseInt(firstSplit[1])>59)
+        if(Integer.parseInt(firstSplit[1])<0 || Integer.parseInt(firstSplit[1])>59)
         {
             return false;
         }
