@@ -2,6 +2,7 @@ package com.example.demo.gui.findboardingpasswindow;
 
 import com.example.demo.BoardingPass.BoardingPass;
 import com.example.demo.BoardingPass.BoardingPassService;
+import com.example.demo.boardingpassgenerator.BoardingPassGenerator;
 import com.example.demo.gui.alertgenerator.AlertGenerator;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -100,6 +101,9 @@ public class FindBoardingPassWindow {
 
         if (boardingPass != null) {
             AlertGenerator.generateSuccessDialog("Boarding Pass has been located.");
+
+            BoardingPassGenerator boardingPassGenerator = new BoardingPassGenerator(boardingPass);
+            boardingPassGenerator.generatePdf();
 
             File boardingPassFile = new File("boarding-pass.pdf");
 
