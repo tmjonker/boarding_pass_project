@@ -229,7 +229,12 @@ public class BoardingPass {
     public void writeToFile()
     {
         try{
-            FileWriter fw = new FileWriter("./src/main/resources/RawBoardingPasses.txt",true);
+            FileWriter fw = null;
+            if (System.getProperty("os.name").contains("Windows")) {
+                fw = new FileWriter("demo/src/main/resources/RawBoardingPasses.txt", true);
+            } else {
+                fw = new FileWriter("src/main/resources/RawBoardingPasses.txt", true);
+            }
             BufferedWriter bw = new BufferedWriter(fw);
             bw.write(this.toString());
             bw.newLine();

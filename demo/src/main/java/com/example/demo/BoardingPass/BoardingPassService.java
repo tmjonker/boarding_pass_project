@@ -23,7 +23,11 @@ public class BoardingPassService extends BoardingPass{
         ArrayList<String> lines;
         try
         {
-            lines = (ArrayList<String>) Files.readAllLines(Paths.get("src/main/resources/RawBoardingPasses.txt"));
+            if (System.getProperty("os.name").contains("Windows")) {
+                lines = (ArrayList<String>) Files.readAllLines(Paths.get("demo/src/main/resources/RawBoardingPasses.txt"));
+            } else {
+                lines = (ArrayList<String>) Files.readAllLines(Paths.get("src/main/resources/RawBoardingPasses.txt"));
+            }
         }catch (Exception e)
         {
             System.out.println(e.getMessage());
@@ -384,7 +388,12 @@ public class BoardingPassService extends BoardingPass{
             boardingPassNumbers.add(i);
         }
         try{
-            ArrayList<String> lines = (ArrayList<String>) Files.readAllLines(Paths.get("src/main/resources/RawBoardingPasses.txt"));
+            ArrayList<String> lines = null;
+            if (System.getProperty("os.name").contains("Windows")) {
+                lines = (ArrayList<String>) Files.readAllLines(Paths.get("demo/src/main/resources/RawBoardingPasses.txt"));
+            } else {
+                lines = (ArrayList<String>) Files.readAllLines(Paths.get("src/main/resources/RawBoardingPasses.txt"));
+            }
             for(var line: lines)
             {
                 BoardingPass pass = makeBoardingPassFromString(line);
