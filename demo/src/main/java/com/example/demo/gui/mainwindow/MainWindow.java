@@ -174,32 +174,33 @@ public class MainWindow {
 
             if (boardingPass != null) {
                 AlertGenerator.generateSuccessDialog("Boarding Pass has been generated.");
+
+                BoardingPassGenerator boardingPassGenerator = new BoardingPassGenerator(boardingPass);
+                boardingPassGenerator.generatePdf();
+
+                File boardingPassFile = new File("boarding-pass.pdf");
+
+                new Thread(() -> {
+
+                    try {
+                        if (Desktop.isDesktopSupported()) {
+
+                            Desktop desktop = Desktop.getDesktop();
+                            desktop.open(boardingPassFile);
+                        } else {
+                            System.out.println("not supported.");
+                        }
+                    } catch (Exception ex) {
+                        System.out.println(ex.getMessage());
+                    }
+
+                }).start();
             } else {
                 AlertGenerator.generateErrorDialog("Failed to generate boarding pass");
             }
 
             onResetClick(); // resets all fields to blanks.
 
-            BoardingPassGenerator boardingPassGenerator = new BoardingPassGenerator(boardingPass);
-            boardingPassGenerator.generatePdf();
-
-            File boardingPassFile = new File("boarding-pass.pdf");
-
-            new Thread(() -> {
-
-                try {
-                    if (Desktop.isDesktopSupported()) {
-
-                        Desktop desktop = Desktop.getDesktop();
-                        desktop.open(boardingPassFile);
-                    } else {
-                        System.out.println("not supported.");
-                    }
-                } catch (Exception ex) {
-                    System.out.println(ex.getMessage());
-                }
-
-            }).start();
         }
     }
 

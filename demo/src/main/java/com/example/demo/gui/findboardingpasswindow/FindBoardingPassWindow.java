@@ -100,26 +100,27 @@ public class FindBoardingPassWindow {
 
         if (boardingPass != null) {
             AlertGenerator.generateSuccessDialog("Boarding Pass has been located.");
+
+            File boardingPassFile = new File("boarding-pass.pdf");
+
+            new Thread(() -> {
+
+                try {
+                    if (Desktop.isDesktopSupported()) {
+
+                        Desktop desktop = Desktop.getDesktop();
+                        desktop.open(boardingPassFile);
+                    } else {
+                        System.out.println("not supported.");
+                    }
+                } catch (Exception ex) {
+                    System.out.println(ex.getMessage());
+                }
+
+            }).start();
         } else {
             AlertGenerator.generateBoardingPassAlert(boardingPassNumber);
         }
-        File boardingPassFile = new File("boarding-pass.pdf");
-
-        new Thread(() -> {
-
-            try {
-                if (Desktop.isDesktopSupported()) {
-
-                    Desktop desktop = Desktop.getDesktop();
-                    desktop.open(boardingPassFile);
-                } else {
-                    System.out.println("not supported.");
-                }
-            } catch (Exception ex) {
-                System.out.println(ex.getMessage());
-            }
-
-        }).start();
 
         stage.close();
     }
