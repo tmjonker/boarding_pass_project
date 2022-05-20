@@ -172,11 +172,15 @@ public class BoardingPass {
         if(digit > 24){
             digit = digit % 24;//get remainder
         }
-
+        String minutes =String.valueOf(temp.get(1));
+        if(String.valueOf(temp.get(1)).length()==1)
+        {
+            minutes = "0"+minutes;
+        }
         if(String.valueOf(digit).length() == 1) {
-            eta = "0" + digit + ":" + temp.get(1);
+            eta = "0" + digit + ":" + minutes;
         }else{
-            eta = digit + ":" + temp.get(1); // should be outputting time of arrival based on when leaving airport
+            eta = digit + ":" + minutes; // should be outputting time of arrival based on when leaving airport
         }
         return eta;
     }
